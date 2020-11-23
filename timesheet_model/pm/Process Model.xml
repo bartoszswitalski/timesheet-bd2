@@ -1,7 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="4B9DA18B-C1E8-5CF7-5EA9-1BDAA8733091">
-<createdBy>steci</createdBy>
-<createdTime>2020-11-03 20:30:48 UTC</createdTime>
-<ownerDesignName>timesheet_model</ownerDesignName>
-<shouldBeOpen>false</shouldBeOpen>
-</ProcessModel>
