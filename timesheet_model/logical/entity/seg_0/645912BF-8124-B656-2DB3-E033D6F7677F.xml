@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="645912BF-8124-B656-2DB3-E033D6F7677F" name="Contact Info">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 20:57:33 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_info" id="BDD24B15-2C94-3253-DF22-854C6EC858CD">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 20:59:20 UTC</createdTime>
+<comment><![CDATA[Contact info id		]]></comment>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="info" id="906DBC1B-5906-BC7C-B210-8ED21D2C9610">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 21:39:33 UTC</createdTime>
+<comment><![CDATA[Contact info]]></comment>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id" id="26604BC3-4205-938D-C2DE-7BDF9162D4FD">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 21:17:06 UTC</createdTime>
+<generatorID>F00057AD-8281-4DD1-5B23-6C001C897E11</generatorID>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<referedAttribute>1C067684-9DA2-0DF6-88C4-D45F2A751AE1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="type" id="ED5E28E5-8ECE-0F2E-371C-5B9BC3C43232">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 21:34:38 UTC</createdTime>
+<generatorID>86476A3E-A776-FCAA-BD23-5058514DB7E0</generatorID>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<referedAttribute>B843C183-9500-3B9A-F840-C1793C78F21D</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="ECE53E20-F80C-8D19-F3FA-E25F27576B4E" name="Contact Info PK">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 21:01:34 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BDD24B15-2C94-3253-DF22-854C6EC858CD</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

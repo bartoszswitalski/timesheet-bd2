@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Relational_1" id="7129543D-5DA4-D574-48BE-635C0DA14AF0" mainViewID="CA00DA82-CB18-093A-58A0-01614D3E1730">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 20:30:50 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+</relationalModel>

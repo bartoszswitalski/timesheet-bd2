@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1E7BF26F-E7D8-E596-26AA-E6FD8B825A05" name="Role Assignment">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:23:42 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="798BBCC2-F9CD-C2CF-95C0-2F6AFEB5E844">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:25:48 UTC</createdTime>
+<generatorID>785796B6-91B3-76E0-499F-91642C698B71</generatorID>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<referedAttribute>1C067684-9DA2-0DF6-88C4-D45F2A751AE1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_project" id="378C3842-BF32-6F7C-DD61-6502A755FEC2">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:26:51 UTC</createdTime>
+<generatorID>1530ECCB-445D-59B3-F952-CC968B367961</generatorID>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<referedAttribute>03496899-ACD8-C168-6981-F5BE23D5C896</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="type" id="A247F022-9F23-E1E9-E050-85E66E26C6DA">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:27:54 UTC</createdTime>
+<generatorID>0CEDD689-5FBC-4469-D3D2-C15495C3A365</generatorID>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<referedAttribute>D40A1607-E5BE-484A-F178-CE163617E174</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>60 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B58353B1-9F93-AD9E-4EA7-7B54FFC3C4BF" name="Role Assigment PK">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:25:48 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>798BBCC2-F9CD-C2CF-95C0-2F6AFEB5E844</attributeRef>
+<attributeRef>378C3842-BF32-6F7C-DD61-6502A755FEC2</attributeRef>
+<attributeRef>A247F022-9F23-E1E9-E050-85E66E26C6DA</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

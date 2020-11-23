@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="BEBA2D56-6EE1-21B9-092C-7776C71A67A4" mainViewID="28FAA064-51B5-F0F8-455A-E0EDF1CE975F">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 20:30:47 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

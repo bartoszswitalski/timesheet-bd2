@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="timesheet_model" id="EDDBBB3A-7928-C8CF-63AE-19CECDBDB0ED" version="3.5">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-03 20:30:47 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>EDDBBB3A-7928-C8CF-63AE-19CECDBDB0ED</designId>
+</OSDM_Design>

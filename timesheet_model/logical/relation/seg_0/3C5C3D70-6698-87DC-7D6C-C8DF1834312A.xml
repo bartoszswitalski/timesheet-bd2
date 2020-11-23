@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_12" directorySegmentName="seg_0" id="3C5C3D70-6698-87DC-7D6C-C8DF1834312A">
+<createdBy>steci</createdBy>
+<createdTime>2020-11-05 10:30:47 UTC</createdTime>
+<ownerDesignName>timesheet_model</ownerDesignName>
+<engineerTo>
+<item key="7129543D-5DA4-D574-48BE-635C0DA14AF0" value="true"/>
+</engineerTo>
+<sourcePk>B58353B1-9F93-AD9E-4EA7-7B54FFC3C4BF</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>have</nameOnSource>
+<nameOnTarget>be done by</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>1E7BF26F-E7D8-E596-26AA-E6FD8B825A05</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>0583D8A0-0CEF-6DFF-418E-C91B5B5AD788</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
