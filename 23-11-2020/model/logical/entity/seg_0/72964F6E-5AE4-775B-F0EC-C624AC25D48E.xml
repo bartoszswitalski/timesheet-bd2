@@ -1,0 +1,149 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="72964F6E-5AE4-775B-F0EC-C624AC25D48E" name="User">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>B674946F-243D-1E61-1984-7A145DC10A31</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="3A9FC088-5849-5790-90B1-4F5DA9408323">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<ownerDesignName>model</ownerDesignName>
+<importedID>1C067684-9DA2-0DF6-88C4-D45F2A751AE1</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="first_name" id="4D09728B-61F3-F6C3-1DE6-553C34822259">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<comment><![CDATA[User's first name]]></comment>
+<ownerDesignName>model</ownerDesignName>
+<importedID>379DE23B-C7CF-4E73-F505-C45CE6625BEB</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last_name" id="52C82628-8ED3-33AE-DBC4-512F94DB4B46">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<comment><![CDATA[User's last name]]></comment>
+<ownerDesignName>model</ownerDesignName>
+<importedID>AF72AF62-2BA6-E194-A993-DBCF535C30A3</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="type" id="0022FD20-8892-9562-4227-42D95D61CC62">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<generatorID>55D0F2BA-9303-F4D3-B39C-5F2DC6E2D82A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<importedID>012CEAEE-8865-AE53-AA6D-72422D7A63BC</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<referedAttribute>A14A6E00-1C9F-5AD9-17F6-96E8C76ABFBB</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_department" id="B9D47DC8-71E3-F031-B0C2-8B9CFAA3322E">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<generatorID>7235080A-ADC5-1F17-A68E-DBCB1FE1B250</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<importedID>14807FC5-4298-192B-CF68-BB3C48B0F20E</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<referedAttribute>B194CCE7-B1BE-9185-343B-BE6D72B5DC77</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="password" id="C257C9C4-C285-F850-03C4-79A154F2C4D9">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>2ECF3EDD-F7B6-C2CB-8049-25000F5939A2</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="login" id="A6F9626B-0A91-9B86-E3A0-3F01A42FE2AC">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>E1F4DD1F-760B-E314-1158-98FE59FCF1A2</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AF2037E5-3491-28C8-DD91-10C9177E2D3D" name="User PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>2A74C200-70F1-DBCE-D881-5B30E58AF05C</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>3A9FC088-5849-5790-90B1-4F5DA9408323</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

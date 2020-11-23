@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="49722FDE-2F7D-B442-EE63-2FC0744EA6EA" name="Work_Time">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>4B27CEDD-3FD4-DB71-62D9-A0537B073ABD</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_work_time" id="B1157268-A5C5-7A4A-2B3F-F4162104BE5B">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Work Time id	]]></comment>
+<generatorID>E7ECEA2C-FDD4-94D6-985C-70E761B09B3E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="date" id="2DEA3368-4445-2171-D582-EBFCABF03355">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Work Time date]]></comment>
+<generatorID>71030044-E630-DA4A-F7A3-0390537ECC7E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="time" id="37A7EC15-3C29-8AAF-5D2F-42797D2AF082">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Work Time time]]></comment>
+<generatorID>8148A587-C8A8-C7A5-CE3C-9522B65E5BF2</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Task_id_task" id="A2BDF45A-FFBC-2303-0200-FDF3A4BED2C9">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>EE4F236F-5D5B-3A56-6E5F-D5C5C4EB3FE6</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="ABC84F8B-729E-6C4F-F635-1B4A3E009D0E" referredColumn="379DA51F-E8D5-32AD-CF4D-31A4EF28A227"/>
+</associations>
+</Column>
+<Column name="Timesheet_id_timesheet" id="F9FB8A6F-7911-7E66-EB9B-12D665AA5B42">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Timesheet id]]></comment>
+<generatorID>C88AC8D4-4CC2-1532-5589-51E5D1148F55</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1FA3FF40-7964-B177-E65B-A66D10F8A003" referredColumn="D8B32CAA-C55C-4237-B705-F397F3FB27A2"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3E2C80B3-05D9-F3E2-FEF5-1F9F40796FD7" name="Work_Time_PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>F3E5A51F-6B6E-DFBC-5D16-FE5E254C3ADF</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B1157268-A5C5-7A4A-2B3F-F4162104BE5B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A0EDBAF8-B0C4-1DE7-7009-70FF5B0AD11C" name="Work_Time_Task_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>D40A0EF3-F801-F8D7-161C-8FC2B205D899</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A2BDF45A-FFBC-2303-0200-FDF3A4BED2C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B9FD66DA-59AC-1FF2-BA68-DFCA87081296" name="Work_Time_Timesheet_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>5098988E-A6CD-668A-0690-59E75ED95184</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F9FB8A6F-7911-7E66-EB9B-12D665AA5B42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

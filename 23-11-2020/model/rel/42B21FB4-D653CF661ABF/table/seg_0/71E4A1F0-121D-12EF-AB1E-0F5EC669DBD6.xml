@@ -1,0 +1,143 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="71E4A1F0-121D-12EF-AB1E-0F5EC669DBD6" name="User">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>72964F6E-5AE4-775B-F0EC-C624AC25D48E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="433542EE-B65C-3F99-CF57-FD0C2A7D769D">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<generatorID>3A9FC088-5849-5790-90B1-4F5DA9408323</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="first_name" id="A76C8EA5-FB15-D3CF-D72A-B6FDD551464C">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[User's first name]]></comment>
+<generatorID>4D09728B-61F3-F6C3-1DE6-553C34822259</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_name" id="EFFBA808-54F6-316B-49F2-4766561D95A5">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[User's last name]]></comment>
+<generatorID>52C82628-8ED3-33AE-DBC4-512F94DB4B46</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="User_Type_type" id="482A645D-5896-37D6-3F96-9B0B5C8A37C9">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>0022FD20-8892-9562-4227-42D95D61CC62</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="51A3B18B-2B75-9511-A148-2A52BAA36319" referredColumn="E25B0B76-4FAE-54B0-36DC-7AAEADD8F254"/>
+</associations>
+</Column>
+<Column name="Department_id_department" id="A5020F4E-E4D0-5E96-AA66-67268793C772">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>B9D47DC8-71E3-F031-B0C2-8B9CFAA3322E</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3DA9C9EF-D6BF-6391-1C71-AE8210A186F2" referredColumn="D97E60E5-A69A-2824-82CC-901A8078FA6D"/>
+</associations>
+</Column>
+<Column name="password" id="46B2A45F-F0FD-E125-6732-02F1902826F0">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>C257C9C4-C285-F850-03C4-79A154F2C4D9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="login" id="E7085C9C-A9E1-C165-198F-64EBD6A22E62">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>A6F9626B-0A91-9B86-E3A0-3F01A42FE2AC</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="404BCAFC-ACDD-71D8-6226-A114F24EE8CA" name="User_PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>AF2037E5-3491-28C8-DD91-10C9177E2D3D</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="433542EE-B65C-3F99-CF57-FD0C2A7D769D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BAF7726E-C2DF-A8EE-2E32-3CE08A6ED037" name="User_Department_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>7235080A-ADC5-1F17-A68E-DBCB1FE1B250</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A5020F4E-E4D0-5E96-AA66-67268793C772"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="58D1BB5B-28AB-826A-6F8F-2640FC067CA3" name="User_User_Type_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>55D0F2BA-9303-F4D3-B39C-5F2DC6E2D82A</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="482A645D-5896-37D6-3F96-9B0B5C8A37C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5750C78A-DB56-AE2D-A080-4359B8E9B9B6" name="Contact Info Type">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>F969AB3D-A045-E5A5-274F-DF2B10C21284</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="type" id="6C6BCF1E-22D2-68C1-F68F-E10A99BCF4D6">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<comment><![CDATA[Contact info name]]></comment>
+<ownerDesignName>model</ownerDesignName>
+<importedID>B843C183-9500-3B9A-F840-C1793C78F21D</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7AD923D8-9AB5-0DB5-7225-29A2773BAAE9" name="Contact Info Type PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>349D1507-3D85-B8ED-BF25-703497698893</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6C6BCF1E-22D2-68C1-F68F-E10A99BCF4D6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

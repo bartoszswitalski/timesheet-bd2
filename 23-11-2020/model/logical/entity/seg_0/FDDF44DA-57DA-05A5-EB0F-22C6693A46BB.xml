@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FDDF44DA-57DA-05A5-EB0F-22C6693A46BB" name="Task Type">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>BC81B420-A2BF-B457-9A81-0BA513FDF10A</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="type" id="122257A7-78E7-5D45-C405-0B629F51B6FF">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>1989E3C8-DD95-7537-0ED9-9BC22B6E6021</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>60 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="231F6CB0-E668-C11F-65AE-8D5874EEA074" name="Task Type PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:32:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<importedID>EB138E90-3660-3007-0FF1-7346721E63A4</importedID>
+<engineerTo>
+<item key="42B21FB4-8AC3-F3FC-63C8-D653CF661ABF" value="true"/>
+<item key="44F01B12-2FAC-905C-767D-7DC3A536B640" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>122257A7-78E7-5D45-C405-0B629F51B6FF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

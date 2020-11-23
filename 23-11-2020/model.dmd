@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="model" id="AFCC9FE3-809D-4E00-D83E-38EE4C2CF793" version="3.5">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 14:31:20 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>AFCC9FE3-809D-4E00-D83E-38EE4C2CF793</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="EDDBBB3A-7928-C8CF-63AE-19CECDBDB0ED">
+<designStoragePath>D:\GithubDesktop\bd2-timesheet\timesheet_model</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

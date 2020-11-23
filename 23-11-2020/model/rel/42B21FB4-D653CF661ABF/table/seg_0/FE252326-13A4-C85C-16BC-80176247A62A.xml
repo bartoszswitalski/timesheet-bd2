@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FE252326-13A4-C85C-16BC-80176247A62A" name="Task">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>BDC65775-AA27-2192-0453-149AB283E1D9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_task" id="379DA51F-E8D5-32AD-CF4D-31A4EF28A227">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Task id	]]></comment>
+<generatorID>74417D6D-03CA-19E6-2753-611CEB4713B1</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="2C5441D2-9A1C-CA90-FED2-7F699999BEA7">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Task name]]></comment>
+<generatorID>0FE3AB10-93A9-B7CC-713E-6BA0B1B98859</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Project_id_project" id="5E37FF38-0DAC-69C8-F425-9AA9C04549A4">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>3D2541E4-05D8-4B5A-4FC0-D5967B1F58D0</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="06E5F84B-290F-5D43-9205-94BB36423495" referredColumn="08A41D6A-D052-E6D9-0E62-AE7DA6B31556"/>
+</associations>
+</Column>
+<Column name="priority" id="D7F3E37B-718C-48B0-1083-B5F751D6542C">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Task priority]]></comment>
+<generatorID>DDE41A39-D060-D282-52E2-55BE26D71837</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="C976B1D0-6750-F302-352A-37E21231C795">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Task description]]></comment>
+<generatorID>D7D69C78-8A1A-2E1B-A1D9-869198B2C772</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Task_Type_type" id="CB517C85-8C47-CD1F-493D-9F438EB5A24C">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>81B85002-0722-535D-6721-61FD8D3F1F22</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="70F594FD-6E16-7790-39DE-2796EA1F4969" referredColumn="F083B58C-E512-E653-56B6-7F231A12E155"/>
+</associations>
+</Column>
+<Column name="User_id" id="92CAA5B5-4FA8-82A5-C0B6-339AF5984C58">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<generatorID>B7ED06AB-B447-AEE1-70B2-A91E2DEDC265</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5993C37A-B152-53A1-DBFB-DCD7F2D1AB3F" referredColumn="433542EE-B65C-3F99-CF57-FD0C2A7D769D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9A9A2E8E-8D93-322C-6D0B-E48F4C179549" name="Task_PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>1D9D8CF9-3EA8-0499-02A2-80CEF05E2069</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="379DA51F-E8D5-32AD-CF4D-31A4EF28A227"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DA83B10B-671F-B922-731C-CE62AC1028D6" name="Task_Task_Type_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>3BFB5B61-612D-721B-20EA-A22885872373</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CB517C85-8C47-CD1F-493D-9F438EB5A24C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9F867EA2-0E6C-A031-6F86-9CFE8EABADD7" name="Task_User_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>1D6AD6DE-3DED-2BED-D308-548FC63561D9</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="92CAA5B5-4FA8-82A5-C0B6-339AF5984C58"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0154FC0E-673E-96A2-5639-29A6F7D02238" name="Task_Project_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>519F17FE-A00D-3EA3-17AB-B0EB4A01C678</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5E37FF38-0DAC-69C8-F425-9AA9C04549A4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

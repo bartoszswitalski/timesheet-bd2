@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2A4CBDE6-E317-3258-FDE2-FFD0671672FA" name="Timesheet">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>01D67E05-EDED-A0C3-27CA-67C50ED3B8C4</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_timesheet" id="D8B32CAA-C55C-4237-B705-F397F3FB27A2">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[Timesheet id]]></comment>
+<generatorID>D2C3B384-B7A6-C813-BFE3-2636D9087FF3</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="User_id" id="F89B729A-5AB8-1F22-3646-1FEE9A4AF20B">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<generatorID>DCEA540D-EC92-49C4-07F6-B9F27B60EE71</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D55CEB53-6F36-62F0-2229-939B1F1F399D" referredColumn="433542EE-B65C-3F99-CF57-FD0C2A7D769D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0179A5F7-3612-647E-B193-CA8BF2A614AF" name="Timesheet_PK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>D164AA98-C608-99F2-3096-0E3053F57537</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D8B32CAA-C55C-4237-B705-F397F3FB27A2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="66096926-E5E1-3FD3-AA4C-7212464457EE" name="Timesheet__IDX">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>772A9D57-36A1-42E5-B5F3-A502848D4255</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="F89B729A-5AB8-1F22-3646-1FEE9A4AF20B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C81D1286-E5B6-2A85-8A98-03BCF1CD1BED" name="Timesheet_User_FK">
+<createdBy>Bartosz</createdBy>
+<createdTime>2020-11-23 15:40:41 UTC</createdTime>
+<generatorID>772A9D57-36A1-42E5-B5F3-A502848D4255</generatorID>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F89B729A-5AB8-1F22-3646-1FEE9A4AF20B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
