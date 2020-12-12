@@ -35,3 +35,6 @@
 **/*.rvi
 **/.#*
 **/CVS/**
+timesheet-bd2/.idea/
+timesheet-bd2/out/
+timesheet-bd2/timesheet-bd2.iml
