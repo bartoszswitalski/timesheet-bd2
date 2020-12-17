@@ -32,22 +32,22 @@ CREATE TABLE contact_info_type (
 
 CREATE TABLE department (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    name        VARCHAR2(50) NOT NULL
+    name        VARCHAR2(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE project (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    name            VARCHAR2(40) NOT NULL,
+    name            VARCHAR2(40) NOT NULL UNIQUE,
     start_date      DATE NOT NULL,
     due_date        DATE,
     end_date        DATE,
     selector        VARCHAR2(8) NOT NULL,
     CONSTRAINT ch_inh_project
-        CHECK ( selector IN ( 'Active', 'Finished' ) ),
+        CHECK ( selector IN ( 'active', 'finished' ) ),
     CONSTRAINT project_exdep
-        CHECK ( ( selector = 'Active'
+        CHECK ( ( selector = 'active'
                     AND end_date IS NULL )
-                OR ( selector = 'Finished'
+                OR ( selector = 'finished'
                     AND due_date IS NULL
                     AND end_date IS NOT NULL ) )
 );
@@ -116,7 +116,7 @@ CREATE TABLE user (
     last_name                 VARCHAR2(40) NOT NULL,
     type                      VARCHAR2(50) NOT NULL,
     department_id             NUMBER(3) NOT NULL,
-    login                     VARCHAR2(20) NOT NULL,
+    login                     VARCHAR2(20) NOT NULL UNIQUE,
     password                  VARCHAR2(40) NOT NULL,
     CONSTRAINT user_department_fk
         FOREIGN KEY ( department_id )
