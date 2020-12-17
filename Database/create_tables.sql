@@ -50,6 +50,12 @@ CREATE TABLE project (
                 OR ( selector = 'finished'
                     AND due_date IS NULL
                     AND end_date IS NOT NULL ) )
+    CONSTRAINT valid_start_date 
+        CHECK (LENGTH(start_date) <= 10 AND DATE(start_date, '+0 days') IS start_date)
+    CONSTRAINT valid_end_date 
+        CHECK (LENGTH(end_date) <= 10 AND DATE(end_date, '+0 days') IS end_date)
+    CONSTRAINT valid_due_date 
+        CHECK (LENGTH(due_date) <= 10 AND DATE(due_date, '+0 days') IS due_date)
 );
 
 CREATE TABLE role_assignment (
@@ -91,6 +97,8 @@ CREATE TABLE task (
     CONSTRAINT task_user_fk
         FOREIGN KEY ( user_id )
         REFERENCES user ( id )
+    CONSTRAINT priority_is_numeric
+        CHECK (typeof(priority) = 'integer' OR typeof(priority) = 'real')
 );
 
 CREATE TABLE task_type (
@@ -142,6 +150,12 @@ CREATE TABLE work_time (
     CONSTRAINT work_time_timesheet_fk
         FOREIGN KEY ( timesheet_id )
         REFERENCES timesheet ( id )
+    CONSTRAINT valid_date 
+        CHECK (LENGTH(date) <= 10 AND DATE(date, '+0 days') IS date)
+    CONSTRAINT time_is_numeric
+        CHECK (typeof(time) = 'integer' OR typeof(time) = 'real')
+    CONSTRAINT time_is_positive
+        CHECK (time > 0)
 );
 
 DROP VIEW IF EXISTS Active_Project;
