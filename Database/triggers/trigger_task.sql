@@ -1,5 +1,7 @@
 -- Task triggers
 
+-- validate project assignment
+
 DROP TRIGGER IF EXISTS task_insert_tr;
 DROP TRIGGER IF EXISTS task_update_tr;
 
@@ -23,4 +25,12 @@ BEGIN
             WHEN (NEW.user_id NOT IN (SELECT user_id FROM role_assignment WHERE user_id = NEW.user_id AND project_id = NEW.project_id))
             THEN RAISE (ABORT, 'User is not assigned to the project.')
             END;
+END;
+
+-- Task deletion
+CREATE TRIGGER IF NOT EXISTS task_after_delete_tr
+    AFTER DELETE
+    ON task
+BEGIN
+    DELETE FROM work_time WHERE task_id = OLD.id;
 END;

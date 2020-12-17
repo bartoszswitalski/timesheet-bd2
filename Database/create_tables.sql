@@ -82,9 +82,9 @@ CREATE TABLE role_type (
 
 CREATE TABLE task (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-    name                VARCHAR2(100) NOT NULL,
+    name                VARCHAR2(100),
     project_id          NUMBER(8),
-    priority            NUMBER(1) NOT NULL,
+    priority            NUMBER(1),
     description         VARCHAR2(1000),
     type                VARCHAR2(60) NOT NULL,
     user_id             NUMBER(8),

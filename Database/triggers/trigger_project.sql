@@ -28,3 +28,12 @@ BEGIN
                     RAISE (ABORT, 'Invalid project end date.')
             END;
 END;
+
+-- Project deletion
+CREATE TRIGGER IF NOT EXISTS project_after_delete_tg
+    AFTER DELETE
+    ON project
+BEGIN
+    DELETE FROM role_assignment WHERE project_id = OLD.id;
+    DELETE FROM task WHERE project_id = OLD.id;
+END;
