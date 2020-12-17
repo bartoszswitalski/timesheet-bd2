@@ -20,7 +20,7 @@ CREATE TABLE contact_info (
     type        VARCHAR2(40) NOT NULL,
     CONSTRAINT contact_info_user_fk
         FOREIGN KEY ( user_id )
-        REFERENCES user ( id ),
+        REFERENCES use ( id ),
     CONSTRAINT contact_info_contact_info_type_fk
         FOREIGN KEY ( type )
         REFERENCES contact_info_type ( type )
