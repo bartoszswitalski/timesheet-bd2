@@ -14,34 +14,34 @@ DROP TABLE IF EXISTS work_time;
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE contact_info (
-    id_info                 INTEGER PRIMARY KEY AUTOINCREMENT,
-    info                    VARCHAR2(100) NOT NULL,
-    user_id                 NUMBER(8) NOT NULL,
-    contact_info_type_type  VARCHAR2(40) NOT NULL,
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    info        VARCHAR2(100) NOT NULL,
+    user_id     NUMBER(8) NOT NULL,
+    type        VARCHAR2(40) NOT NULL,
     CONSTRAINT contact_info_user_fk
         FOREIGN KEY ( user_id )
         REFERENCES use ( id ),
     CONSTRAINT contact_info_contact_info_type_fk
-        FOREIGN KEY ( contact_info_type_type )
+        FOREIGN KEY ( type )
         REFERENCES contact_info_type ( type )
 );
 
 CREATE TABLE contact_info_type (
-    type VARCHAR2(40) PRIMARY KEY
+    type        VARCHAR2(40) PRIMARY KEY
 );
 
 CREATE TABLE department (
-    id_department  INTEGER PRIMARY KEY AUTOINCREMENT,
-    name           VARCHAR2(50) NOT NULL
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        VARCHAR2(50) NOT NULL
 );
 
 CREATE TABLE project (
-    id_project  INTEGER PRIMARY KEY AUTOINCREMENT,
-    name        VARCHAR2(40) NOT NULL,
-    start_date  DATE NOT NULL,
-    due_date    DATE,
-    end_date    DATE,
-    selector    VARCHAR2(8) NOT NULL,
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    name            VARCHAR2(40) NOT NULL,
+    start_date      DATE NOT NULL,
+    due_date        DATE,
+    end_date        DATE,
+    selector        VARCHAR2(8) NOT NULL,
     CONSTRAINT ch_inh_project
         CHECK ( selector IN ( 'Active', 'Finished' ) ),
     CONSTRAINT project_exdep
@@ -54,19 +54,19 @@ CREATE TABLE project (
 
 CREATE TABLE role_assignment (
     user_id             NUMBER(8) NOT NULL,
-    project_id_project  NUMBER(8) NOT NULL,
-    role_type_type      VARCHAR2(60) NOT NULL,
+    project_id          NUMBER(8) NOT NULL,
+    role_type          VARCHAR2(60) NOT NULL,
     CONSTRAINT role_assignment_pk PRIMARY KEY ( user_id,
-                                                project_id_project,
-                                                role_type_type ),
+                                                project_id,
+                                                role_type ),
     CONSTRAINT role_assignment_user_fk
         FOREIGN KEY ( user_id )
         REFERENCES user ( id ),
     CONSTRAINT role_assignment_project_fk
-        FOREIGN KEY ( project_id_project )
-        REFERENCES project ( id_project ),
+        FOREIGN KEY ( project_id )
+        REFERENCES project ( id ),
     CONSTRAINT role_assignment_role_type_fk
-        FOREIGN KEY ( role_type_type )
+        FOREIGN KEY ( role_type )
         REFERENCES role_type ( type )
 );
 
@@ -75,18 +75,18 @@ CREATE TABLE role_type (
 );
 
 CREATE TABLE task (
-    id_task             INTEGER PRIMARY KEY AUTOINCREMENT,
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
     name                VARCHAR2(100) NOT NULL,
-    project_id_project  NUMBER(8),
+    project_id          NUMBER(8),
     priority            NUMBER(1) NOT NULL,
     description         VARCHAR2(1000),
-    task_type_type      VARCHAR2(60) NOT NULL,
+    type                VARCHAR2(60) NOT NULL,
     user_id             NUMBER(8),
     CONSTRAINT task_project_fk
-        FOREIGN KEY ( project_id_project )
-        REFERENCES project ( id_project ),
+        FOREIGN KEY ( project_id )
+        REFERENCES project ( id ),
     CONSTRAINT task_task_type_fk
-        FOREIGN KEY ( task_type_type )
+        FOREIGN KEY ( type )
         REFERENCES task_type ( type ),
     CONSTRAINT task_user_fk
         FOREIGN KEY ( user_id )
@@ -98,7 +98,7 @@ CREATE TABLE task_type (
 );
 
 CREATE TABLE timesheet (
-    id_timesheet  INTEGER PRIMARY KEY AUTOINCREMENT,
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id       NUMBER(8) NOT NULL,
     CONSTRAINT timesheet_user_fk
         FOREIGN KEY ( user_id )
@@ -114,15 +114,15 @@ CREATE TABLE user (
     id                        INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name                VARCHAR2(40) NOT NULL,
     last_name                 VARCHAR2(40) NOT NULL,
-    user_type_type            VARCHAR2(50) NOT NULL,
-    department_id_department  NUMBER(3) NOT NULL,
+    type                      VARCHAR2(50) NOT NULL,
+    department_id             NUMBER(3) NOT NULL,
     login                     VARCHAR2(20) NOT NULL,
     password                  VARCHAR2(40) NOT NULL,
     CONSTRAINT user_department_fk
-        FOREIGN KEY ( department_id_department )
-        REFERENCES department ( id_department ),
+        FOREIGN KEY ( department_id )
+        REFERENCES department ( id ),
     CONSTRAINT user_user_type_fk
-        FOREIGN KEY ( user_type_type )
+        FOREIGN KEY ( type )
         REFERENCES user_type ( type )
 );
 
@@ -131,23 +131,23 @@ CREATE TABLE user_type (
 );
 
 CREATE TABLE work_time (
-    id_work_time            INTEGER PRIMARY KEY AUTOINCREMENT,
+    id                      INTEGER PRIMARY KEY AUTOINCREMENT,
     "date"                  DATE NOT NULL,
     time                    NUMBER NOT NULL,
-    task_id_task            NUMBER(8) NOT NULL,
-    timesheet_id_timesheet  NUMBER(8) NOT NULL,
+    task_id                 NUMBER(8) NOT NULL,
+    timesheet_id            NUMBER(8) NOT NULL,
     CONSTRAINT work_time_task_fk
-        FOREIGN KEY ( task_id_task )
-        REFERENCES task ( id_task ),
+        FOREIGN KEY ( task_id )
+        REFERENCES task ( id ),
     CONSTRAINT work_time_timesheet_fk
-        FOREIGN KEY ( timesheet_id_timesheet )
-        REFERENCES timesheet ( id_timesheet )
+        FOREIGN KEY ( timesheet_id )
+        REFERENCES timesheet ( id )
 );
 
 DROP VIEW IF EXISTS Active_Project;
-CREATE VIEW Active_Project ( id_project, name, start_date, due_date ) AS
+CREATE VIEW Active_Project ( id, name, start_date, due_date ) AS
 SELECT
-    project.id_project,
+    project.id,
     project.name,
     project.start_date,
     project.due_date
@@ -156,9 +156,9 @@ FROM
 ;
 
 DROP VIEW IF EXISTS Finished_Project;
-CREATE VIEW Finished_Project ( id_project, name, start_date, end_date ) AS
+CREATE VIEW Finished_Project ( id, name, start_date, end_date ) AS
 SELECT
-    project.id_project,
+    project.id,
     project.name,
     project.start_date,
     project.end_date
