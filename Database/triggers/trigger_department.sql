@@ -1,4 +1,5 @@
 -- Department triggers
+DROP TRIGGER IF EXISTS department_after_delete_tr;
 
 -- Department deletion
 CREATE TRIGGER IF NOT EXISTS department_after_delete_tr

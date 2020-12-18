@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS role_assignment;
 DROP TABLE IF EXISTS role_type;
 DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS task_type;
-DROP TABLE IF EXISTS timesheet;
+/*DROP TABLE IF EXISTS timesheet;*/
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS user_type;
 DROP TABLE IF EXISTS work_time;
@@ -88,6 +88,7 @@ CREATE TABLE task (
     description         VARCHAR2(1000),
     type                VARCHAR2(60) NOT NULL,
     user_id             NUMBER(8),
+    status              VARCHAR2(8),
     CONSTRAINT task_project_fk
         FOREIGN KEY ( project_id )
         REFERENCES project ( id ),
@@ -96,27 +97,29 @@ CREATE TABLE task (
         REFERENCES task_type ( type ),
     CONSTRAINT task_user_fk
         FOREIGN KEY ( user_id )
-        REFERENCES user ( id )
+        REFERENCES user ( id ),
     CONSTRAINT priority_is_numeric
-        CHECK (typeof(priority) = 'integer' OR typeof(priority) = 'real')
+        CHECK (typeof(priority) = 'integer' OR typeof(priority) = 'real' OR typeof(priority) = NULL),
+    CONSTRAINT status_is_finished_or_active
+        CHECK (status = 'active' OR status = 'finished')
 );
 
 CREATE TABLE task_type (
     type VARCHAR2(60) PRIMARY KEY
 );
 
-CREATE TABLE timesheet (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id       NUMBER(8) NOT NULL,
-    CONSTRAINT timesheet_user_fk
-        FOREIGN KEY ( user_id )
-        REFERENCES user ( id )
-);
+--CREATE TABLE timesheet (
+--    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+--    user_id       NUMBER(8) NOT NULL,
+--    CONSTRAINT timesheet_user_fk
+--        FOREIGN KEY ( user_id )
+--        REFERENCES user ( id )
+--);
 
-CREATE UNIQUE INDEX timesheet__idx ON
+/*CREATE UNIQUE INDEX timesheet__idx ON
     timesheet (
         user_id
-    ASC );
+    ASC );*/
 
 CREATE TABLE user (
     id                        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -143,13 +146,9 @@ CREATE TABLE work_time (
     "date"                  DATE NOT NULL,
     time                    NUMBER NOT NULL,
     task_id                 NUMBER(8) NOT NULL,
-    timesheet_id            NUMBER(8) NOT NULL,
     CONSTRAINT work_time_task_fk
         FOREIGN KEY ( task_id )
         REFERENCES task ( id ),
-    CONSTRAINT work_time_timesheet_fk
-        FOREIGN KEY ( timesheet_id )
-        REFERENCES timesheet ( id )
     CONSTRAINT valid_date 
         CHECK (LENGTH(date) <= 10 AND DATE(date, '+0 days') IS date)
     CONSTRAINT time_is_numeric

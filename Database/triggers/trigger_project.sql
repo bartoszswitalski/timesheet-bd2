@@ -1,5 +1,10 @@
--- Validate project end and due date.
+-- Project triggers
+DROP TRIGGER IF EXISTS project_insert_tg;
+DROP TRIGGER IF EXISTS project_update_tg;
+DROP TRIGGER IF EXISTS project_after_delete_tg;
+DROP TRIGGER IF EXISTS project_after_update_finished_tg;
 
+-- Validate project end and due date.
 CREATE TRIGGER IF NOT EXISTS project_insert_tg
     BEFORE INSERT
     ON project
@@ -36,4 +41,15 @@ CREATE TRIGGER IF NOT EXISTS project_after_delete_tg
 BEGIN
     DELETE FROM role_assignment WHERE project_id = OLD.id;
     DELETE FROM task WHERE project_id = OLD.id;
+END;
+
+-- Project update when Finished
+CREATE TRIGGER IF NOT EXISTS project_after_update_finished_tg
+    AFTER UPDATE
+    ON project
+BEGIN
+    UPDATE task
+    SET status = CASE
+        WHEN ((SELECT EXISTS(SELECT 1 FROM task WHERE project_id = OLD.id)) AND NEW.selector = 'finished') == 1 THEN 'finished' END
+    WHERE project_id = OLD.id;
 END;
