@@ -7,6 +7,7 @@ DATATYPE_DIRECTORY_PATH = "data types/"
 DATA_DIRECTORY_PATH = "data/"
 DATABASE_PATH = "database.db"
 
+
 def manage_scripts():
     table_paths = [TABLE_DIRECTORY_PATH + x for x in listdir(TABLE_DIRECTORY_PATH) if x.endswith(".sql")]
     trigger_paths = [TRIGGER_DIRECTORY_PATH + x for x in listdir(TRIGGER_DIRECTORY_PATH) if x.endswith(".sql")]
@@ -26,7 +27,7 @@ def manage_scripts():
     except sqlite3.Error as err:
         print("Error while connecting to SQLite", err)
     finally:
-        if (sqlite_connection):
+        if sqlite_connection:
             sqlite_connection.close()
             print("The SQLite connection is closed")
 
