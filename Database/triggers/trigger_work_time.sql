@@ -4,7 +4,7 @@ DROP TRIGGER IF EXISTS work_time_update_tg;
 
 -- Validation of daily work time limit
 CREATE TRIGGER IF NOT EXISTS work_time_insert_tg
-    BEFORE INSERT
+    AFTER INSERT
     ON work_time
 BEGIN
         SELECT
@@ -16,7 +16,7 @@ END;
 
 
 CREATE TRIGGER IF NOT EXISTS work_time_update_tg
-    BEFORE UPDATE
+    AFTER UPDATE
     ON work_time
 BEGIN
         SELECT

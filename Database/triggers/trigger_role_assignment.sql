@@ -9,5 +9,5 @@ BEGIN
     SET user_id = CASE
         WHEN (SELECT EXISTS(SELECT 1 FROM role_assignment WHERE project_id = OLD.project_id)) == 0 THEN NULL
     END
-    WHERE user_id = OLD.user_id;
+    WHERE user_id = OLD.user_id AND project_id = OLD.project_id;
 END;

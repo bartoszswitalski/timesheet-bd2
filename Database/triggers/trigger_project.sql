@@ -6,7 +6,7 @@ DROP TRIGGER IF EXISTS project_after_update_finished_tg;
 
 -- Validate project end and due date.
 CREATE TRIGGER IF NOT EXISTS project_insert_tg
-    BEFORE INSERT
+    AFTER INSERT
     ON project
 BEGIN
         SELECT
@@ -21,7 +21,7 @@ END;
 
 
 CREATE TRIGGER IF NOT EXISTS project_update_tg
-    BEFORE UPDATE
+    AFTER UPDATE
     ON project
 BEGIN
         SELECT
