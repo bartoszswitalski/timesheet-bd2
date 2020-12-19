@@ -1,5 +1,6 @@
 import sqlite3
 from os import listdir
+from typing import List
 
 TABLE_DIRECTORY_PATH = "./"
 TRIGGER_DIRECTORY_PATH = "triggers/"
@@ -14,7 +15,7 @@ def manage_scripts():
     datatype_paths = [DATATYPE_DIRECTORY_PATH + x for x in listdir(DATATYPE_DIRECTORY_PATH) if x.endswith(".sql")]
     data_paths = [DATA_DIRECTORY_PATH + x for x in listdir(DATA_DIRECTORY_PATH) if x.endswith(".sql")]
     data_paths.sort()
-    file_paths = table_paths + trigger_paths + datatype_paths + data_paths
+    file_paths = table_paths + datatype_paths + data_paths + trigger_paths
 
     try:
         sqlite_connection = sqlite3.connect(DATABASE_PATH)
@@ -32,17 +33,17 @@ def manage_scripts():
             print("The SQLite connection is closed")
 
 
-def execute_scripts(file_paths, cursor):
-    try:
-        for path in file_paths:
+def execute_scripts(file_paths: List[str], cursor: sqlite3.Cursor):
+    for path in file_paths:
+        try:
             file = open(path)
             script = file.read()
             cursor.executescript(script)
             print("Executed file: " + path)
-    except OSError as err:
-        print("Error while executing file: " + path, err)
-    except sqlite3.Error as err:
-        print("Error while executing file: " + path, err)
+        except OSError as err:
+            print("Error while executing file: " + path, err)
+        except sqlite3.Error as err:
+            print("Error while executing file: " + path, err)
 
 
 manage_scripts()
