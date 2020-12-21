@@ -15,9 +15,9 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE contact_info (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    info        VARCHAR2(100) NOT NULL,
-    user_id     NUMBER(8) NOT NULL,
-    type        VARCHAR2(40) NOT NULL,
+    info        VARCHAR NOT NULL,
+    user_id     INTEGER NOT NULL,
+    type        VARCHAR NOT NULL,
     CONSTRAINT contact_info_user_fk
         FOREIGN KEY ( user_id )
         REFERENCES user ( id ),
@@ -27,21 +27,21 @@ CREATE TABLE contact_info (
 );
 
 CREATE TABLE contact_info_type (
-    type        VARCHAR2(40) PRIMARY KEY
+    type        VARCHAR PRIMARY KEY
 );
 
 CREATE TABLE department (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    name        VARCHAR2(50) NOT NULL UNIQUE
+    name        VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE project (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    name            VARCHAR2(40) NOT NULL UNIQUE,
+    name            VARCHAR NOT NULL UNIQUE,
     start_date      DATE NOT NULL,
     due_date        DATE,
     end_date        DATE,
-    selector        VARCHAR2(8) NOT NULL,
+    selector        VARCHAR NOT NULL,
     CONSTRAINT ch_inh_project
         CHECK ( selector IN ( 'active', 'finished' ) ),
     CONSTRAINT project_exdep
@@ -59,9 +59,9 @@ CREATE TABLE project (
 );
 
 CREATE TABLE role_assignment (
-    user_id             NUMBER(8) NOT NULL,
-    project_id          NUMBER(8) NOT NULL,
-    role_type          VARCHAR2(60) NOT NULL,
+    user_id             INTEGER NOT NULL,
+    project_id          INTEGER NOT NULL,
+    role_type           VARCHAR NOT NULL,
     CONSTRAINT role_assignment_pk PRIMARY KEY ( user_id,
                                                 project_id,
                                                 role_type ),
@@ -82,13 +82,13 @@ CREATE TABLE role_type (
 
 CREATE TABLE task (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-    name                VARCHAR2(100),
-    project_id          NUMBER(8),
-    priority            NUMBER(1),
-    description         VARCHAR2(1000),
-    type                VARCHAR2(60) NOT NULL,
-    user_id             NUMBER(8),
-    status              VARCHAR2(8),
+    name                VARCHAR,
+    project_id          INTEGER,
+    priority            INTEGER,
+    description         VARCHAR,
+    type                VARCHAR NOT NULL,
+    user_id             INTEGER,
+    status              VARCHAR,
     CONSTRAINT task_project_fk
         FOREIGN KEY ( project_id )
         REFERENCES project ( id ),
@@ -123,12 +123,12 @@ CREATE TABLE task_type (
 
 CREATE TABLE user (
     id                        INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name                VARCHAR2(40) NOT NULL,
-    last_name                 VARCHAR2(40) NOT NULL,
-    type                      VARCHAR2(50) NOT NULL,
-    department_id             NUMBER(3) NOT NULL,
-    login                     VARCHAR2(20) NOT NULL UNIQUE,
-    password                  VARCHAR2(40) NOT NULL,
+    first_name                VARCHAR NOT NULL,
+    last_name                 VARCHAR NOT NULL,
+    type                      VARCHAR NOT NULL,
+    department_id             INTEGER NOT NULL,
+    login                     VARCHAR NOT NULL UNIQUE,
+    password                  VARCHAR NOT NULL,
     CONSTRAINT user_department_fk
         FOREIGN KEY ( department_id )
         REFERENCES department ( id ),
@@ -143,9 +143,9 @@ CREATE TABLE user_type (
 
 CREATE TABLE work_time (
     id                      INTEGER PRIMARY KEY AUTOINCREMENT,
-    "date"                  DATE NOT NULL,
-    time                    NUMBER NOT NULL,
-    task_id                 NUMBER(8) NOT NULL,
+    date                    DATE NOT NULL,
+    time                    INTEGER NOT NULL,
+    task_id                 INTEGER NOT NULL,
     CONSTRAINT work_time_task_fk
         FOREIGN KEY ( task_id )
         REFERENCES task ( id ),
@@ -166,6 +166,7 @@ SELECT
     project.due_date
 FROM
     project
+WHERE project.selector = 'active'
 ;
 
 DROP VIEW IF EXISTS Finished_Project;
@@ -177,4 +178,5 @@ SELECT
     project.end_date
 FROM
     project 
+WHERE project.selector = 'finished'
 ;
