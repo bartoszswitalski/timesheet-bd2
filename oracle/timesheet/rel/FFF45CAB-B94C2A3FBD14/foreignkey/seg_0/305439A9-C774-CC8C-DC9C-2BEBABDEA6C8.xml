@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="305439A9-C774-CC8C-DC9C-2BEBABDEA6C8" containerWithKeyObject="3F77B7B7-EDCE-5410-65C8-AE82532331B6" localFKIndex="9FECEF21-2B20-C880-DCE3-DE29D2767AAF" name="Active_Project_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>2E20B683-9C41-FF39-F191-430FCB81C548</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<referredTableLongName>Project</referredTableLongName>
+<arc>6AC6990F-5449-984B-F506-ADA74BB8DBCA</arc>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>B8FDEA18-09AC-A371-7AE2-23FE57FA4CB2</referredTableID>
+<keyObject>F3843DCF-9C3C-E1F6-399B-467E02EF0EE0</keyObject>
+<referredKeyID>F3843DCF-9C3C-E1F6-399B-467E02EF0EE0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_project</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<discriminatorValue>Active</discriminatorValue>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,158 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="AF391B22-7915-379D-445E-455FC4EAFF9F" name="User">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>72964F6E-5AE4-775B-F0EC-C624AC25D48E</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="A5B27D6B-A40E-3394-8C6F-D0BFEB6F9C8D">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>3A9FC088-5849-5790-90B1-4F5DA9408323</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="first_name" id="CFEAC0D5-5ED5-1B3E-CF8C-6EC08F3CC4EF">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[User's first name]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>4D09728B-61F3-F6C3-1DE6-553C34822259</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last_name" id="620B56E1-B84D-EF94-D7C2-A752079D6981">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[User's last name]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>52C82628-8ED3-33AE-DBC4-512F94DB4B46</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="type" id="C4B25598-9211-172C-311F-712670FC94B4">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<generatorID>09F5C858-CCE2-31B5-57A6-1486C300E4EC</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>0022FD20-8892-9562-4227-42D95D61CC62</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<referedAttribute>BD00BF8A-6422-AEAE-3605-C352F49E8F77</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_department" id="F65B1459-69B9-9D24-BB84-4231A1251308">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<generatorID>CEED7B0E-DE7E-7B9A-42A1-4D52E3FE7AFC</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>B9D47DC8-71E3-F031-B0C2-8B9CFAA3322E</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<referedAttribute>02A48E70-80AF-DA19-654A-385CAD368949</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="password" id="2E19C743-73D5-7083-EA09-05AF6386E608">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>C257C9C4-C285-F850-03C4-79A154F2C4D9</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="login" id="706EE22E-55A1-3D8C-A3AD-0311252AE6DA">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>A6F9626B-0A91-9B86-E3A0-3F01A42FE2AC</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="25B7F0EE-8A61-7071-0286-5AE3936DBE3E" name="User PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>AF2037E5-3491-28C8-DD91-10C9177E2D3D</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A5B27D6B-A40E-3394-8C6F-D0BFEB6F9C8D</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

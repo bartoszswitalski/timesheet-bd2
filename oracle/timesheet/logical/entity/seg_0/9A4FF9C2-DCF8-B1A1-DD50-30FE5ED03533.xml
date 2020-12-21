@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9A4FF9C2-DCF8-B1A1-DD50-30FE5ED03533" name="Project">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>15059F8A-00CB-D18C-BCE1-59E016BBC5A4</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<generateDiscrimColumn>true</generateDiscrimColumn>
+<discriminatorColumnName>selector</discriminatorColumnName>
+<completeSubtypes>true</completeSubtypes>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_project" id="A0063ADA-6323-A390-D6FE-DB4D0BA5B671">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[Project id]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>2C550C66-8484-A1B7-59B2-92806832232D</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="FCFD0B2D-DAA7-7FBC-57EA-E46044905E93">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[Project name]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>70DE5DA0-494A-303C-8FCA-618B2F8CECDA</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="start_date" id="01FD69BF-8308-DE42-7148-E46D027BC3C2">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<comment><![CDATA[Project start date]]></comment>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>A63F0613-3DE4-B259-AFB8-08819AC7A77A</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A60FE990-5FAB-31BC-BF3F-5FA8B425C2A6" name="Project PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>F3C3FFDF-B984-1DD3-026A-AF01FC10C0DD</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A0063ADA-6323-A390-D6FE-DB4D0BA5B671</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

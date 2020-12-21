@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_4" directorySegmentName="seg_0" id="5CF40D5A-6270-F8ED-0DDB-9C41009B36D2">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:19:17 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<importedID>DE7C5110-12E5-18BA-9E8F-347957D7705C</importedID>
+<engineerTo>
+<item key="FFF45CAB-9C7C-4858-DCA2-B94C2A3FBD14" value="true"/>
+<item key="9E1E8010-6278-6F7E-AD7F-45DA2BCF2222" value="true"/>
+<item key="F1B69E94-405E-F435-FA54-B0524AC168B9" value="true"/>
+</engineerTo>
+<sourcePk>39581D1B-B483-6CD7-D385-1DED722FBA55</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>have an instance of</nameOnSource>
+<nameOnTarget>be</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>1C1232AD-A56A-B9D5-9D3A-907916312908</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>00268521-5261-1EA4-224A-E4FF08F65884</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

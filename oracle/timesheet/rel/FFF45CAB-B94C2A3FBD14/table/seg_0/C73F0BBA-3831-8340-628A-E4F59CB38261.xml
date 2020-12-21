@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C73F0BBA-3831-8340-628A-E4F59CB38261" name="Department">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>541DBC1C-4A7E-FFAF-8BE3-91A7DC7FEEF3</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_department" id="05190B54-02FF-44A9-B4B6-C4766A9EBA22">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Department's id	]]></comment>
+<generatorID>02A48E70-80AF-DA19-654A-385CAD368949</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="FFAFABB4-ACC6-3233-1659-E76E04BF30E2">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Department's name]]></comment>
+<generatorID>914C1F08-0E10-63A5-8DED-394F2CF65DB3</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F9C00E0E-913E-4EF0-2052-63AE7BD61E14" name="Department_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>5A857A8A-E12A-27C1-08D1-F3C4D490F564</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="05190B54-02FF-44A9-B4B6-C4766A9EBA22"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

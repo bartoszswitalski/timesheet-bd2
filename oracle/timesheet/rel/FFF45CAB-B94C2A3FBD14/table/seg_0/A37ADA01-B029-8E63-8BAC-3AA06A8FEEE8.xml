@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A37ADA01-B029-8E63-8BAC-3AA06A8FEEE8" name="Finished">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>5547280B-EE18-D1D6-7B2D-F261072B9305</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_project" id="6F1FA1CD-D355-6398-137B-2B39E0360314">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Project id]]></comment>
+<generatorID>A0063ADA-6323-A390-D6FE-DB4D0BA5B671</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C754BDF5-A21C-7D13-829E-1A671A65F4A0" referredColumn="A2A83849-8D4A-ECD9-D1D6-3A82828A1192"/>
+</associations>
+</Column>
+<Column name="end_date" id="EECDF2BB-B3AA-0A81-BE34-C33CA7C0CE8C">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>0521CD1D-E1ED-C35E-9CB4-7318A7E9700F</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B34A1312-BFA5-FB82-B02D-62BBB77DD650" name="Finished_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>A60FE990-5FAB-31BC-BF3F-5FA8B425C2A6</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F1FA1CD-D355-6398-137B-2B39E0360314"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D831B78C-2E28-C8F5-90BF-1053255AF75E" name="Finished_Project_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>93B7D6BD-AA6A-5550-BF02-1E5DE2A476E0</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F1FA1CD-D355-6398-137B-2B39E0360314"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

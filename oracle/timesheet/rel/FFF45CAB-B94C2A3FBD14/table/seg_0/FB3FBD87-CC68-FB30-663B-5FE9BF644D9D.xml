@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FB3FBD87-CC68-FB30-663B-5FE9BF644D9D" name="User_Type">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>79BFABF7-CE27-7D54-B028-4403785A2A21</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="type" id="894DED5B-30C3-5B85-D450-B06E597D3224">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[User type name]]></comment>
+<generatorID>BD00BF8A-6422-AEAE-3605-C352F49E8F77</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0E1B278B-B4E0-80D7-D7F2-5B7BF8B88EB1" name="User_Type_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>E9ABB8B4-0B0B-3211-D5BC-F8C81EA29026</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="894DED5B-30C3-5B85-D450-B06E597D3224"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,175 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="67D3A1CB-670E-9CF7-E15E-DE7400388404" name="Task">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>9662965F-E954-CE0B-5C99-2682B604F464</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_task" id="5788D7E1-7B76-BCB1-3C9F-D736D4A1D5B8">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Task id	]]></comment>
+<generatorID>1FC0FDF2-0313-2E8F-8F6E-C2160879E11B</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="8A7180D0-2A0C-5D5C-BA8E-A7347FB2C0E2">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Task name]]></comment>
+<generatorID>1F3DEC98-C677-6B7E-13C6-23F1574578C9</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Project_id_project" id="5DB0AFC5-CB24-5B0A-5672-DAEF7169D1CA">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>D276631D-0214-EEF4-E421-0A581AEDC27B</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="803D2A7F-7ACE-6E02-957F-28CD47F3456A" referredColumn="A2A83849-8D4A-ECD9-D1D6-3A82828A1192"/>
+</associations>
+</Column>
+<Column name="priority" id="7B931E42-AFB5-AD1B-740F-EE89D3C1F9A9">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Task priority]]></comment>
+<generatorID>D0E86F10-9E93-CB67-79CC-635CC9525D81</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="8E773762-B413-822B-097D-08A1642E5AE0">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Task description]]></comment>
+<generatorID>844E9F35-8A94-37F9-0D8B-88DD1EAFC62A</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Task_Type_type" id="0BFFF756-D2BD-2CC2-DC10-10308BA6808E">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>2937697C-235E-49C5-DF54-F84B47274BBE</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7CBF5EAC-62C5-28E1-D8B8-1AC4A5292838" referredColumn="6565FCC7-AA9D-DD68-A03E-9662C9E8337E"/>
+</associations>
+</Column>
+<Column name="User_id" id="2A6DA768-562D-47D6-1299-993868759100">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[User id]]></comment>
+<generatorID>1C9E5E96-829A-DC7C-94FB-35A45CEE766E</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="EB72942E-E230-E03A-E982-399EA6514330" referredColumn="23B32350-5C8D-D843-310C-0CE650409657"/>
+</associations>
+</Column>
+<Column name="status" id="6EEE11D7-AF6C-87E2-3FF2-5AD97337A83E">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>F0D6BB75-93F9-4F61-8A32-DE4743EFF6BE</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>8</dataTypeSize>
+<ownDataTypeParameters>8,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="ACAD2CF2-4B17-98E5-5C6D-ECF64E96B0A6" name="Task_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>1D13942C-0BF8-6517-2DBB-849AED9302ED</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5788D7E1-7B76-BCB1-3C9F-D736D4A1D5B8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="40BBA539-3DCA-BD96-1A3F-D54AB2BBC697" name="Task_Task_Type_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>08CFA3BC-FE7B-A64C-DCA9-6EDB69B82580</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0BFFF756-D2BD-2CC2-DC10-10308BA6808E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0EFD373F-AEDB-52FC-74F6-61C30B4B05BC" name="Task_User_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>775CDA82-CDEB-03B3-BC33-925A9BF3B351</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2A6DA768-562D-47D6-1299-993868759100"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="57840776-0203-4BC2-D96D-2F93327535FA" name="Task_Project_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>3195E64D-07B5-829E-DDA6-6913472968F7</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5DB0AFC5-CB24-5B0A-5672-DAEF7169D1CA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

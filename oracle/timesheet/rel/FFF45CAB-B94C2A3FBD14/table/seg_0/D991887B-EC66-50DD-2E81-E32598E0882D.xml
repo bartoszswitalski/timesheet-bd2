@@ -1,0 +1,109 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D991887B-EC66-50DD-2E81-E32598E0882D" name="Role_Assignment">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>4D52B16A-FCFC-5F83-C974-753249D6AFD9</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="User_id" id="258B3FBF-2E24-F131-533D-ACDC004649B3">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>4F67412B-3D78-A680-CEFE-07D9861AF693</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9003C2D4-FCDD-1E96-EDC0-6BF9AF7E6D9D" referredColumn="23B32350-5C8D-D843-310C-0CE650409657"/>
+</associations>
+</Column>
+<Column name="Project_id_project" id="14566437-61E0-F7A5-5172-C05C57B69FC0">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>4FB12193-70F4-C57B-8533-B49346DEA307</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FCA1E3DF-6851-591E-B01D-028C37DB35C5" referredColumn="A2A83849-8D4A-ECD9-D1D6-3A82828A1192"/>
+</associations>
+</Column>
+<Column name="Role_Type_type" id="7295F3AC-4F1B-6EE4-0193-01B39D659777">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>594F1F89-FA6D-3E3D-5AEB-AB6A5DE82BED</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="ECE2759E-2954-E72D-E67C-14D47ABF7E79" referredColumn="7EE8A8CE-8802-046F-E107-7CC42F31CE40"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1AE2AE65-E9ED-8556-A7BC-E679F174B48A" name="Role_Assignment_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>8B0AFEF7-4FBC-7E06-209E-377879CEAC09</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="258B3FBF-2E24-F131-533D-ACDC004649B3"/>
+<colUsage columnID="14566437-61E0-F7A5-5172-C05C57B69FC0"/>
+<colUsage columnID="7295F3AC-4F1B-6EE4-0193-01B39D659777"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EF9CBA87-5684-8EED-BADC-4F825ACF1FA1" name="Role_Assignment_Role_Type_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>98911F32-4880-6676-C504-39A5EACD2ECB</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7295F3AC-4F1B-6EE4-0193-01B39D659777"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D0EA461B-55B9-BB1D-1E03-D046CBF0C578" name="Role_Assignment_User_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>BA2159AD-9D13-5A6F-89E3-F767DA4D3043</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="258B3FBF-2E24-F131-533D-ACDC004649B3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="08DF65E6-E16E-50E6-9305-E774C72C106D" name="Role_Assignment_Project_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>5CC49212-B6DC-1361-1AAC-D9B854FD2CF7</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="14566437-61E0-F7A5-5172-C05C57B69FC0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

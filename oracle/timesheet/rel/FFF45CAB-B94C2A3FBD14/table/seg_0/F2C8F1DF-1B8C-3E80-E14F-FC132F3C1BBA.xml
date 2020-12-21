@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F2C8F1DF-1B8C-3E80-E14F-FC132F3C1BBA" name="Contact_Info">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>00268521-5261-1EA4-224A-E4FF08F65884</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_info" id="7C20C35B-7A13-3474-89BC-75908A62DA9C">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Contact info id		]]></comment>
+<generatorID>1FE307DC-6696-9404-967C-0B40104B8999</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="info" id="29710AC3-ADDF-EAB6-FAED-64FB799A3F86">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<comment><![CDATA[Contact info]]></comment>
+<generatorID>9C19985C-5C08-CE7F-1D54-86ED211B3680</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="User_id" id="AA84037A-9FD0-7216-A370-3D1E3504A16F">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>7AD1B182-5169-F6DA-DFC8-8D931582C983</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6BDFD22E-86F7-8933-5A6F-69860191E5DC" referredColumn="23B32350-5C8D-D843-310C-0CE650409657"/>
+</associations>
+</Column>
+<Column name="Contact_Info_Type_type" id="B15EEA97-AAA2-DA31-7DB9-A7973A5620F4">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>7CC5E956-EB3B-77FC-8ADF-5303B125BAE8</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="50AC2F5A-31BC-3B91-BACD-274DE82ED795" referredColumn="15DF2514-DF55-DC33-A210-D215F31D3F0A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F1CC050D-884E-A0EC-817B-1A50FC4F9A37" name="Contact_Info_PK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>B83A170E-50D1-0C88-A102-086F2BDCC189</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C20C35B-7A13-3474-89BC-75908A62DA9C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1A2E38B7-8F00-DCB1-C6B1-2BEEC7E30388" name="Contact_Info_User_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>8AA3A788-552F-EB1E-B84D-50AF4DCD43B6</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AA84037A-9FD0-7216-A370-3D1E3504A16F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5C36FA22-D44F-7CD7-CE93-C44D7ED5E5E1" name="Contact_Info_Contact_Info_Type_FK">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:25:55 UTC</createdTime>
+<generatorID>5CF40D5A-6270-F8ED-0DDB-9C41009B36D2</generatorID>
+<ownerDesignName>timesheet</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B15EEA97-AAA2-DA31-7DB9-A7973A5620F4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="timesheet" id="0ED1B7FE-8F3F-C766-E1F8-4DCE1E30462A" version="3.5">
+<createdBy>bartu</createdBy>
+<createdTime>2020-12-21 10:18:50 UTC</createdTime>
+<ownerDesignName>timesheet</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>0ED1B7FE-8F3F-C766-E1F8-4DCE1E30462A</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="EDDBBB3A-7928-C8CF-63AE-19CECDBDB0ED">
+<designStoragePath>D:\GithubDesktop\bd2-timesheet\timesheet_model</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="AFCC9FE3-809D-4E00-D83E-38EE4C2CF793">
+<designStoragePath>D:\Projects\GitHub\timesheet-bd2\oracle\model</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>
