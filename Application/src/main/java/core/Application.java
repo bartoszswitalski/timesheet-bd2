@@ -1,3 +1,7 @@
+package core;
+
+import gui.AppFrame;
+
 import java.sql.*;
 
 public class Application {
@@ -14,11 +18,11 @@ public class Application {
 
             System.out.println("ID\t Name\t\t State");
 
-            while ( rs.next() ) {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String selector = rs.getString("selector");
-                System.out.println(id+"\t"+name+"\t\t"+selector);
+                System.out.println(id + "\t" + name + "\t\t" + selector);
             }
             rs.close();
 
@@ -36,6 +40,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        new AppFrame();
         connect();
     }
 }
