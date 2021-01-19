@@ -1,5 +1,6 @@
 package gui;
 
+import utils.Credentials;
 import utils.DialogHandler;
 import utils.ImageLoader;
 
@@ -21,6 +22,8 @@ public class AppFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
+
+        login();
     }
 
     private JMenuBar initMenuBar() {
@@ -97,6 +100,10 @@ public class AppFrame extends JFrame {
         });
     }
 
+    private void login() {
+        Credentials credentials = DialogHandler.showSignInDialog(this);
+    }
+
     private void action1() {
         DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
                 "Placeholder 1");
@@ -111,4 +118,5 @@ public class AppFrame extends JFrame {
         DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
                 "Placeholder 3");
     }
+
 }
