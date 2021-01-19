@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Optional;
 
 import utils.Credentials;
 
@@ -27,7 +28,11 @@ public class DialogHandler {
 
         panel.add(controls, BorderLayout.CENTER);
 
-        JOptionPane.showMessageDialog(frame, panel, "Sign-in", JOptionPane.QUESTION_MESSAGE);
+        int check = JOptionPane.showConfirmDialog(frame, panel, "Sign-in", JOptionPane.OK_CANCEL_OPTION);
+
+        if (check == JOptionPane.CANCEL_OPTION) {
+            System.exit(0);
+        }
 
         return new Credentials(login.getText(), new String(password.getPassword()));
     }

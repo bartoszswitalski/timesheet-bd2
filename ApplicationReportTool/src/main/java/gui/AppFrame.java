@@ -1,5 +1,7 @@
 package gui;
 
+import database.Query;
+import database.Results;
 import utils.Credentials;
 import utils.DialogHandler;
 import utils.ImageLoader;
@@ -7,6 +9,7 @@ import utils.ImageLoader;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Optional;
 
 public class AppFrame extends JFrame {
     public AppFrame() {
@@ -102,6 +105,15 @@ public class AppFrame extends JFrame {
 
     private void login() {
         Credentials credentials = DialogHandler.showSignInDialog(this);
+        Results results = Query.runQuery(
+                new String[]{"login", "password", "type"}, new String("user"),
+                new String(" WHERE login is \"" + credentials.getLogin()
+                        + "\" and password is \"" + credentials.getPassword() + "\""));
+
+        if (results.isEmpty() || !results.getTopResult(2).equals("manager")) {
+            login();
+        }
+
     }
 
     private void action1() {
