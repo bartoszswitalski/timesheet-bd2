@@ -8,7 +8,7 @@ public class AppPanel extends JPanel {
 
     public AppPanel(Image bgImage) {
         this.bgImage = bgImage;
-        setPreferredSize(new Dimension(bgImage.getWidth(this), bgImage.getHeight(this)));
+        setPreferredSize(new Dimension(1900, 1200));
         setOpaque(true);
 
         setLayout(new BorderLayout());

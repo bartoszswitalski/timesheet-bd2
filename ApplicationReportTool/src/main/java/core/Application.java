@@ -10,7 +10,7 @@ public class Application {
         Connection conn = null;
         try {
             // create a connection to the database
-            conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:../Database/database.db");
             System.out.println("Connection to SQLite has been established.");
 
             Statement stmt = conn.createStatement();
