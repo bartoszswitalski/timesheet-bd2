@@ -2,12 +2,14 @@ package utils;
 
 import database.Query;
 import database.Results;
-import gui.AppFrame;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DialogHandler {
+
+    private static final String SINGLE_EMPLOYEE = "Single employee";
+    private static final String MULTIPLE_EMPLOYEES = "Multiple employees";
 
     public static Credentials showSignInDialog(JFrame frame) {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -76,6 +78,21 @@ public class DialogHandler {
         employeesList.setVisible(true);
     }
 
+    public static void showEmployeesDialogAdmin(JFrame frame) {
+        String[] cols = new String[]{"id", "first_name", "last_name", "type"};
+
+        Results results = Query.runQuery(
+                /* SELECT */cols,
+                /* FROM */ new String("user"),
+                /* WHERE */ new String(""));
+
+        String title = new String("Employees of the company");
+
+        JDialog employeesList = setTableDialog(frame, title, results.getRowData(), cols);
+
+        employeesList.setVisible(true);
+    }
+
     private static String setTimesheetDialog(JFrame frame) {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
         label.add(new JLabel("User id", SwingConstants.RIGHT));
@@ -117,6 +134,27 @@ public class DialogHandler {
         JDialog employeeTimesheet = setTableDialog(frame, title, results.getRowData(), cols);
 
         employeeTimesheet.setVisible(true);
+
+    }
+
+    public static void showMonthlyTimesheetDialog(JFrame frame) {
+        String[] yearChoices = new String[]{"2017", "2018", "2019", "2020", "2021"};
+        String inputYear = (String) JOptionPane.showInputDialog(null,
+                "Choose option:", "Monthly timesheet", JOptionPane.QUESTION_MESSAGE,
+                null, yearChoices, yearChoices[0]);
+
+        String[] monthChoices = new String[]{"January", "February", "March", "April", "May", "June",
+                "July", "September", "October", "November", "December"};
+        String inputMonth = (String) JOptionPane.showInputDialog(null,
+                "Choose option:", "Monthly timesheet", JOptionPane.QUESTION_MESSAGE,
+                null, monthChoices, monthChoices[0]);
+
+        String[] numberChoices = new String[]{SINGLE_EMPLOYEE, MULTIPLE_EMPLOYEES};
+        String inputNumber = (String) JOptionPane.showInputDialog(null,
+                "Choose option:", "Monthly timesheet", JOptionPane.QUESTION_MESSAGE,
+                null, numberChoices, numberChoices[0]);
+
+        //todo: finish MonthlyTimesheetDialog
 
     }
 }

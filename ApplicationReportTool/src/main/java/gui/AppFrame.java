@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 public class AppFrame extends JFrame {
 
     private Credentials credentials;
+    private static final int ROLE = 2;
+    private static final int DEPARTMENT = 3;
 
     public AppFrame() {
         setTitle("SQL project");
@@ -53,9 +55,9 @@ public class AppFrame extends JFrame {
 
         menu.addSeparator();
 
-        JMenuItem genChart = new JMenuItem("Jeszcze nie wiem (3)");
-        genChart.addActionListener(e -> action3());
-        menu.add(genChart);
+        JMenuItem monthTimesheet = new JMenuItem("Get monthly timesheet (3)");
+        monthTimesheet.addActionListener(e -> monthTimesheetList());
+        menu.add(monthTimesheet);
 
         menu.addSeparator();
 
@@ -92,7 +94,7 @@ public class AppFrame extends JFrame {
                     case KeyEvent.VK_X -> System.exit(0);
                     case KeyEvent.VK_1 -> employeesList();
                     case KeyEvent.VK_2 -> timesheetList();
-                    case KeyEvent.VK_3 -> action3();
+                    case KeyEvent.VK_3 -> monthTimesheetList();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
                             "Version 1.0 " + '\n' + "\u00a9 2020", "About");
                 }
@@ -113,11 +115,12 @@ public class AppFrame extends JFrame {
                 new String("WHERE login is \"" + this.credentials.getLogin()
                         + "\" and password is \"" + this.credentials.getPassword() + "\""));
 
-        this.credentials.setDepartmentId(results.getTopResult(3));
+        this.credentials.setRole(results.getTopResult(ROLE));
+        this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
 
         if (results.isEmpty()
-                || (!results.getTopResult(2).equals("manager")
-                && !results.getTopResult(2).equals("admin"))) {
+                || (!results.getTopResult(ROLE).equals("manager")
+                && !results.getTopResult(ROLE).equals("admin"))) {
 
             login();
         }
@@ -125,16 +128,19 @@ public class AppFrame extends JFrame {
     }
 
     private void employeesList() {
-        DialogHandler.showEmployeesDialog(this, this.credentials.getDepartment_id());
+        if (this.credentials.getRole().equals("manager")) {
+            DialogHandler.showEmployeesDialog(this, this.credentials.getDepartment_id());
+        } else {
+            DialogHandler.showEmployeesDialogAdmin(this);
+        }
     }
 
     private void timesheetList() {
         DialogHandler.showTimesheetDialog(this);
     }
 
-    private void action3() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 3");
+    private void monthTimesheetList() {
+        DialogHandler.showMonthlyTimesheetDialog(this);
     }
 
 }

@@ -4,6 +4,7 @@ public class Credentials {
     private String login;
     private String password;
     private String departmentId;
+    private String role;
 
     public Credentials(String login, String password) {
         this.login = login;
@@ -22,6 +23,10 @@ public class Credentials {
         this.departmentId = departmentId;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getLogin() {
         return this.login;
     }
@@ -32,5 +37,9 @@ public class Credentials {
 
     public String getDepartment_id() {
         return this.departmentId;
+    }
+
+    public String getRole() {
+        return this.role;
     }
 }
