@@ -1,13 +1,19 @@
 package gui;
 
+import core.Connect;
 import utils.DialogHandler;
 import utils.ImageLoader;
+import utils.User;
+import core.Results;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class AppFrame extends JFrame {
+
+    private User user;
+
     public AppFrame() {
         setTitle("SQL project");
         setIconImage(ImageLoader.getImage("icon.png"));
@@ -21,6 +27,8 @@ public class AppFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
+
+        login();
     }
 
     private JMenuBar initMenuBar() {
@@ -95,6 +103,25 @@ public class AppFrame extends JFrame {
 
             }
         });
+    }
+
+    private void login() {
+        this.user = DialogHandler.showSignInDialog(this);
+        Results results = Connect.runQuery(
+                /* SELECT */ new String[]{"login", "password", "type", "department_id"},
+                /* FROM */ new String("user"),
+                new String("WHERE login is \"" + this.user.getLogin()
+                        + "\" and password is \"" + this.user.getPassword() + "\""));
+
+        //this.user.setDepartmentId(results.getTopResult(3));
+
+        if (results.isEmpty()
+                || (!results.getTopResult(2).equals("manager")
+                && !results.getTopResult(2).equals("admin"))) {
+
+            login();
+        }
+
     }
 
     private void action1() {
