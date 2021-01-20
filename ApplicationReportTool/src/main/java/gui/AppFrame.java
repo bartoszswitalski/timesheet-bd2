@@ -9,9 +9,11 @@ import utils.ImageLoader;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Optional;
 
 public class AppFrame extends JFrame {
+
+    private Credentials credentials;
+
     public AppFrame() {
         setTitle("SQL project");
         setIconImage(ImageLoader.getImage("icon.png"));
@@ -39,21 +41,21 @@ public class AppFrame extends JFrame {
     private JMenu initMainMenu() {
         JMenu menu = new JMenu("Menu");
 
-        JMenuItem startLocalGame = new JMenuItem("Action 1 (1)");
-        startLocalGame.addActionListener(e -> action1());
-        menu.add(startLocalGame);
+        JMenuItem employees = new JMenuItem("Department employees list (1)");
+        employees.addActionListener(e -> employeesList());
+        menu.add(employees);
 
         menu.addSeparator();
 
-        JMenuItem hostOnlineGame = new JMenuItem("Action 2 (2)");
-        hostOnlineGame.addActionListener(e -> action2());
-        menu.add(hostOnlineGame);
+        JMenuItem timesheet = new JMenuItem("Search for a timesheet (2)");
+        timesheet.addActionListener(e -> timesheetList());
+        menu.add(timesheet);
 
         menu.addSeparator();
 
-        JMenuItem joinOnlineGame = new JMenuItem("Action 3 (3)");
-        joinOnlineGame.addActionListener(e -> action3());
-        menu.add(joinOnlineGame);
+        JMenuItem genChart = new JMenuItem("Jeszcze nie wiem (3)");
+        genChart.addActionListener(e -> action3());
+        menu.add(genChart);
 
         menu.addSeparator();
 
@@ -88,11 +90,11 @@ public class AppFrame extends JFrame {
                 int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_X -> System.exit(0);
-                    case KeyEvent.VK_1 -> action1();
-                    case KeyEvent.VK_2 -> action2();
+                    case KeyEvent.VK_1 -> employeesList();
+                    case KeyEvent.VK_2 -> timesheetList();
                     case KeyEvent.VK_3 -> action3();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
-                            "Version 1.0 " + '\n' + "© 2020", "About");
+                            "Version 1.0 " + '\n' + "\u00a9 2020", "About");
                 }
             }
 
@@ -104,26 +106,30 @@ public class AppFrame extends JFrame {
     }
 
     private void login() {
-        Credentials credentials = DialogHandler.showSignInDialog(this);
+        this.credentials = DialogHandler.showSignInDialog(this);
         Results results = Query.runQuery(
-                new String[]{"login", "password", "type"}, new String("user"),
-                new String(" WHERE login is \"" + credentials.getLogin()
-                        + "\" and password is \"" + credentials.getPassword() + "\""));
+                /* SELECT */ new String[]{"login", "password", "type", "department_id"},
+                /* FROM */ new String("user"),
+                new String("WHERE login is \"" + this.credentials.getLogin()
+                        + "\" and password is \"" + this.credentials.getPassword() + "\""));
 
-        if (results.isEmpty() || !results.getTopResult(2).equals("manager")) {
+        this.credentials.setDepartmentId(results.getTopResult(3));
+
+        if (results.isEmpty()
+                || (!results.getTopResult(2).equals("manager")
+                && !results.getTopResult(2).equals("admin"))) {
+
             login();
         }
 
     }
 
-    private void action1() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 1");
+    private void employeesList() {
+        DialogHandler.showEmployeesDialog(this, this.credentials.getDepartment_id());
     }
 
-    private void action2() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 2");
+    private void timesheetList() {
+        DialogHandler.showTimesheetDialog(this);
     }
 
     private void action3() {

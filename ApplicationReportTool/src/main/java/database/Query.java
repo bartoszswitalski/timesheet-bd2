@@ -42,20 +42,25 @@ public class Query {
         }
         query += " FROM ";
         query += table;
-        if (where != null) query += where;
+        if (!where.equals("")) {
+            query += ' ';
+            query += where;
+        }
 
         query += ';';
 
+        System.out.println(query);
         // TRY QUERY
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
 
             while (rs.next()) {
                 String[] result = new String[colsLength];
 
                 for (int i = 0; i < colsLength; ++i) {
-                    result[i] = rs.getString(cols[i]);
+                    result[i] = rs.getString(rsmd.getColumnName(i + 1));
                 }
 
                 results.add(result);
@@ -71,6 +76,5 @@ public class Query {
         Query.disconnect(conn);
         return new Results(results);
     }
-
 
 }
