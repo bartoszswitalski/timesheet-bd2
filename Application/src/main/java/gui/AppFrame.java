@@ -34,28 +34,25 @@ public class AppFrame extends JFrame {
     private JMenuBar initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(initMainMenu());
-        menuBar.add(initInfoMenu());
+        menuBar.add(initTimeMenu());
+        menuBar.add(initProjectMenu());
+        menuBar.add(initUserMenu());
         return menuBar;
     }
 
     private JMenu initMainMenu() {
         JMenu menu = new JMenu("Menu");
 
-        JMenuItem startLocalGame = new JMenuItem("Action 1 (1)");
-        startLocalGame.addActionListener(e -> action1());
-        menu.add(startLocalGame);
+        JMenuItem account = new JMenuItem("My account (A)");
+        account.addActionListener(e -> manageAccount());
+        menu.add(account);
 
         menu.addSeparator();
 
-        JMenuItem hostOnlineGame = new JMenuItem("Action 2 (2)");
-        hostOnlineGame.addActionListener(e -> action2());
-        menu.add(hostOnlineGame);
-
-        menu.addSeparator();
-
-        JMenuItem joinOnlineGame = new JMenuItem("Action 3 (3)");
-        joinOnlineGame.addActionListener(e -> action3());
-        menu.add(joinOnlineGame);
+        JMenuItem about = new JMenuItem("About (I)");
+        about.addActionListener(e -> DialogHandler.showConfirmDialog(this, "SQL project" + '\n' +
+                "Version 1.0 " + '\n' + "© 2020", "About"));
+        menu.add(about);
 
         menu.addSeparator();
 
@@ -66,13 +63,44 @@ public class AppFrame extends JFrame {
         return menu;
     }
 
-    private JMenu initInfoMenu() {
-        JMenu menu = new JMenu("Info");
+    private JMenu initTimeMenu() {
+        JMenu menu = new JMenu("Time");
 
-        JMenuItem about = new JMenuItem("Program info (I)");
-        about.addActionListener(e -> DialogHandler.showConfirmDialog(this, "SQL project" + '\n' +
-                "Version 1.0 " + '\n' + "© 2020", "About"));
-        menu.add(about);
+        JMenuItem registerTime = new JMenuItem("Register time (T)");
+        registerTime.addActionListener(e -> registerTime());
+        menu.add(registerTime);
+
+        return menu;
+    }
+
+    private JMenu initProjectMenu() {
+        JMenu menu = new JMenu("Projects");
+
+        JMenuItem addProject = new JMenuItem("Add project (P)");
+        addProject.addActionListener(e -> addProject());
+        menu.add(addProject);
+
+        menu.addSeparator();
+
+        JMenuItem editProject = new JMenuItem("Edit project (E)");
+        editProject.addActionListener(e -> editProject());
+        menu.add(editProject);
+
+        return menu;
+    }
+
+    private JMenu initUserMenu() {
+        JMenu menu = new JMenu("Users");
+
+        JMenuItem addUser = new JMenuItem("Add user (U)");
+        addUser.addActionListener(e -> addUser());
+        menu.add(addUser);
+
+        menu.addSeparator();
+
+        JMenuItem removeUser = new JMenuItem("Remove user (R)");
+        removeUser.addActionListener(e -> removeUser());
+        menu.add(removeUser);
 
         return menu;
     }
@@ -90,9 +118,12 @@ public class AppFrame extends JFrame {
                 int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_X -> System.exit(0);
-                    case KeyEvent.VK_1 -> action1();
-                    case KeyEvent.VK_2 -> action2();
-                    case KeyEvent.VK_3 -> action3();
+                    case KeyEvent.VK_A -> manageAccount();
+                    case KeyEvent.VK_T -> registerTime();
+                    case KeyEvent.VK_P -> addProject();
+                    case KeyEvent.VK_E -> editProject();
+                    case KeyEvent.VK_U -> addUser();
+                    case KeyEvent.VK_R -> removeUser();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
                             "Version 1.0 " + '\n' + "© 2020", "About");
                 }
@@ -115,27 +146,38 @@ public class AppFrame extends JFrame {
 
         //this.user.setDepartmentId(results.getTopResult(3));
 
-        if (results.isEmpty()
-                || (!results.getTopResult(2).equals("manager")
-                && !results.getTopResult(2).equals("admin"))) {
-
+        if (results.isEmpty()) {
             login();
         }
 
     }
 
-    private void action1() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 1");
+    private void registerTime() {
+        DialogHandler.showTimeRegistrationDialog(this);
     }
 
-    private void action2() {
+    private void addProject() {
         DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 2");
+                "Placeholder");
     }
 
-    private void action3() {
+    private void editProject() {
         DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 3");
+                "Placeholder");
+    }
+
+    private void manageAccount() {
+        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
+                "Placeholder");
+    }
+
+    private void addUser() {
+        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
+                "Placeholder");
+    }
+
+    private void removeUser() {
+        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
+                "Placeholder");
     }
 }
