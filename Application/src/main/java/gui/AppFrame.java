@@ -138,20 +138,20 @@ public class AppFrame extends JFrame {
 
     private void login() {
         this.user = DialogHandler.showSignInDialog(this);
+        String[] parameters = new String[]{user.getLogin(), user.getPassword()};
+
         Results results = Connect.runQuery(
                 /* SELECT */ new String[]{"id", "login", "password", "type", "department_id"},
                 /* FROM */ new String("user"),
-                new String("WHERE login is \"" + this.user.getLogin()
-                        + "\" and password is \"" + this.user.getPassword() + "\""));
+                new String("WHERE login is ? and password is ?"), parameters);
 
         //this.user.setDepartmentId(results.getTopResult(3));
-        this.user.setID(results.getTopResult(0));
-        this.user.setRole(results.getTopResult(3));
 
         if (results.isEmpty()) {
             login();
         }
-
+        this.user.setID(results.getTopResult(0));
+        this.user.setRole(results.getTopResult(3));
     }
 
     private void manageAccount() {

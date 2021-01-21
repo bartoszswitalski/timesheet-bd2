@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Properties;
 
 import core.Connect;
@@ -73,12 +74,13 @@ public class DialogHandler {
 
     private static JDialog setAccountDialog(JFrame frame, User user, String title, String[][] rowData, String[] cols) {
         JDialog dialog = new JDialog(frame, title);
+        String[] parameters = new String[]{user.getID()};
 
         String[] colsUser = new String[]{"first_name", "last_name", "type"};
         Results results = Connect.runQuery(
                 /* SELECT */colsUser,
                 /* FROM */ new String("user u"),
-                new String("WHERE u.id is \"" + user.getID() + "\""));
+                new String("WHERE u.id is ?"), parameters);
 
         JPanel label = new JPanel(new GridLayout(0, 3, 2, 2));
         label.add(new JLabel("Name: " + results.getTopResult(0), SwingConstants.LEFT));
@@ -101,8 +103,8 @@ public class DialogHandler {
                 if(new_contact != null) {
                     Connect.runInsert("contact_info",
                             new String[]{ "info", "user_id", "type" },
-                            new String[]{ "\"" + new_contact[1] + "\"",
-                                    user.getID(), "\"" + new_contact[0] + "\"" });
+                            new String[]{ "?", "?", "?"},
+                            new String[]{new_contact[1], user.getID(), new_contact[0]});
                     model.addRow(new_contact);
                 }
             }
@@ -117,8 +119,9 @@ public class DialogHandler {
                     String[] new_contact = showContactDialog(editVal);
                     Connect.runUpdate("contact_info",
                             new String[]{ "info", "type" },
-                            new String[]{ "\"" + new_contact[1] + "\"",  "\"" + new_contact[0] + "\""},
-                            " WHERE info = \"" + editVal + "\"");
+                            new String[]{ "?", "?"},
+                            " WHERE info = ?",
+                            new String[]{new_contact[1], new_contact[0], editVal});
                     contacts.setValueAt(new_contact[0], row, 0);
                     contacts.setValueAt(new_contact[1], row, 1);
                 } else {
@@ -138,8 +141,8 @@ public class DialogHandler {
 
                     if(check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("contact_info",
-                                "WHERE info = \""
-                                        + contacts.getModel().getValueAt(row, 1).toString() + "\"");
+                                "WHERE info = ?",
+                                new String[]{contacts.getModel().getValueAt(row, 1).toString()});
                         ((DefaultTableModel)contacts.getModel()).removeRow(row);
                     }
                 } else {
@@ -161,11 +164,12 @@ public class DialogHandler {
 
     public static void showAccountDialog(JFrame frame, User user) {
         String[] cols = new String[]{"type", "info"};
+        String[] parameters = new String[]{user.getID()};
 
         Results results = Connect.runQuery(
                 /* SELECT */cols,
                 /* FROM */ new String("contact_info ci"),
-                new String("WHERE ci.user_id is \"" + user.getID() + "\""));
+                new String("WHERE ci.user_id is ?"), parameters);
 
         String title = new String("Account");
 
@@ -183,10 +187,11 @@ public class DialogHandler {
 
         panel.add(label, BorderLayout.WEST);
 
+        String[] parameters = new String[]{};
         JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
         Results contact_types = Connect.runQuery(
                 new String[]{"type"},
-                "contact_info_type", "");
+                "contact_info_type", "", parameters);
         DefaultComboBoxModel list = new DefaultComboBoxModel();
         for(int i = 0; i < contact_types.getRowData().length; i++) {
             list.addElement(contact_types.getRowData()[i][0]);
@@ -220,9 +225,10 @@ public class DialogHandler {
         JTextField valueLogin = new JTextField(10);
         rightControls.add(valueLogin);
         rightControls.add(new JLabel("Department:", SwingConstants.LEFT));
+        String[] parameters = new String[]{};
         Results departs = Connect.runQuery(
                 new String[]{"id"},
-                "department", "");
+                "department", "", parameters);
         DefaultComboBoxModel listDeparts = new DefaultComboBoxModel();
         for(int i = 0; i < departs.getRowData().length; i++) {
             listDeparts.addElement(departs.getRowData()[i][0]);
@@ -239,7 +245,7 @@ public class DialogHandler {
         leftControls.add(new JLabel("Role:", SwingConstants.LEFT));
         Results roleTypes = Connect.runQuery(
                 new String[]{"type"},
-                "user_type", "");
+                "user_type", "", parameters);
         DefaultComboBoxModel listRoles = new DefaultComboBoxModel();
         for(int i = 0; i < roleTypes.getRowData().length; i++) {
             listRoles.addElement(roleTypes.getRowData()[i][0]);
@@ -258,10 +264,10 @@ public class DialogHandler {
                 showConfirmDialog(null, "Not all fields have been filled up!", "Error");
             } else {
                 String[] cols = {"first_name", "last_name", "type", "department_id", "login", "password"};
-                String[] vals = {"\"" + valueName.getText() + "\"", "\"" + valueSurname.getText() + "\"",
-                        "\"" + types.getSelectedItem().toString() + "\"", valueDepart.getSelectedItem().toString(),
-                        "\"" + valueLogin.getText() + "\"", "\"" + valuePass.getText() + "\""};
-                Connect.runInsert("user", cols, vals);
+                String[] vals = {"?", "?", "?", "?", "?", "?"};
+                String[] params = {valueName.getText(), valueSurname.getText(), Objects.requireNonNull(types.getSelectedItem()).toString(),
+                        Objects.requireNonNull(valueDepart.getSelectedItem()).toString(), valueLogin.getText(), valuePass.getText()};
+                Connect.runInsert("user", cols, vals, params);
                 showConfirmDialog(null, "Successfully added new employee!", "Success");
             }
         }
@@ -287,8 +293,8 @@ public class DialogHandler {
 
                     if(check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("user",
-                                "WHERE id = \""
-                                        + accounts.getModel().getValueAt(row, 0) + "\"");
+                                "WHERE id = ?",
+                                        new String[]{accounts.getModel().getValueAt(row, 0).toString()});
                         ((DefaultTableModel)accounts.getModel()).removeRow(row);
                     }
                 } else {
@@ -309,10 +315,12 @@ public class DialogHandler {
     public static void showDeleteEmpDialog(JFrame frame) {
         String[] cols = new String[]{"id", "first_name", "last_name", "type"};
 
+        String[] parameters = new String[]{};
+
         Results results = Connect.runQuery(
                 /* SELECT */cols,
                 /* FROM */ new String("user"),
-                "");
+                "", parameters);
 
         String title = new String("Delete");
         JDialog employeesList = setDeleteEmpDialog(frame, title, results.getRowData(), cols);
