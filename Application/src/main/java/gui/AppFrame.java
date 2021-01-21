@@ -146,7 +146,7 @@ public class AppFrame extends JFrame {
 
         //this.user.setDepartmentId(results.getTopResult(3));
         this.user.setID(results.getTopResult(0));
-        this.user.setRole(results.getTopResult(2));
+        this.user.setRole(results.getTopResult(3));
 
         if (results.isEmpty()) {
             login();
@@ -154,41 +154,49 @@ public class AppFrame extends JFrame {
 
     }
 
+    private void manageAccount() {
+        DialogHandler.showAccountDialog(this, user);
+    }
+
     private void registerTime() {
         DialogHandler.showTimeRegistrationDialog(this);
     }
 
     private void addProject() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder");
+        if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
+            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
+                    "Placeholder");
+        } else {
+            DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
+                    "Message");
+        }
     }
 
     private void editProject() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder");
-    }
-
-    private void manageAccount() {
-        DialogHandler.showAccountDialog(this, user);
+        if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
+            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
+                    "Placeholder");
+        } else {
+            DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
+                    "Message");
+        }
     }
 
     private void addUser() {
-        if(user.getRole() != "admin") {
+        if(user.getRole().equals("admin")) {
+            DialogHandler.showNewEmployeeDialog();
+        } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
                     "Message");
-        } else {
-            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                    "Placeholder");
         }
     }
 
     private void removeUser() {
-        if(user.getRole() != "admin") {
+        if(user.getRole().equals("admin")) {
+            DialogHandler.showDeleteEmpDialog(this);
+        } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
                     "Message");
-        } else {
-            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                    "Placeholder");
         }
     }
 }
