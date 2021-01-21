@@ -74,9 +74,11 @@ public class Query {
         // TRY QUERY
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            for(int i = 0; i < params.length; i++) {
-                stmt.setString(i+1, params[i]);
-            }
+
+            if (params != null)
+                for (int i = 0; i < params.length; i++) {
+                    stmt.setString(i + 1, params[i]);
+                }
             ResultSet rs = stmt.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
 

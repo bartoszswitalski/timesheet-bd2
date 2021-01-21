@@ -36,6 +36,7 @@ public class AppFrame extends JFrame {
     private JMenuBar initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(initMainMenu());
+        menuBar.add(initProjectMenu());
         menuBar.add(initInfoMenu());
         return menuBar;
     }
@@ -66,6 +67,21 @@ public class AppFrame extends JFrame {
         menu.add(exit);
 
         return menu;
+    }
+
+    private JMenu initProjectMenu() {
+        JMenu menu = new JMenu("Projects");
+
+        JMenuItem project = new JMenuItem("Show projects");
+        project.addActionListener(e -> projectList());
+        menu.add(project);
+
+        JMenuItem projectRoles = new JMenuItem("Show role assignments");
+        projectRoles.addActionListener(e -> projectRoles());
+        menu.add(projectRoles);
+
+        return menu;
+
     }
 
     private JMenu initInfoMenu() {
@@ -121,10 +137,10 @@ public class AppFrame extends JFrame {
                 && !results.getTopResult(ROLE).equals("admin"))) {
 
             login();
+        } else {
+            this.credentials.setRole(results.getTopResult(ROLE));
+            this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
         }
-
-        this.credentials.setRole(results.getTopResult(ROLE));
-        this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
 
     }
 
@@ -144,4 +160,11 @@ public class AppFrame extends JFrame {
         DialogHandler.showFilteredTimesheetDialog(this);
     }
 
+    private void projectList() {
+        DialogHandler.showProjects(this);
+    }
+
+    private void projectRoles() {
+        DialogHandler.showProjectAssignments(this);
+    }
 }

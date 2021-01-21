@@ -5,11 +5,81 @@ import database.Results;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 
 public class DialogHandler {
 
     private static final String SINGLE_EMPLOYEE = "Single employee";
     private static final String MULTIPLE_EMPLOYEES = "Multiple employees";
+
+    static class SaveHandler implements ActionListener {
+
+        private final String[][] rowData;
+        private final String[] cols;
+        private final JButton button;
+
+        public SaveHandler(String[][] rowData, String[] cols, JButton button) {
+            this.rowData = rowData;
+            this.cols = cols;
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Save button pressed!");
+            try {
+                JFileChooser c = new JFileChooser();
+                int retVal = c.showSaveDialog(this.button);
+
+                if (retVal == JFileChooser.APPROVE_OPTION) {
+                    File file = c.getSelectedFile();
+
+                    if (file == null) return;
+
+                    if (!file.getName().toLowerCase().endsWith(".txt")) {
+                        file = new File(file.getParentFile(), file.getName() + ".txt");
+                    }
+
+                    try {
+                        FileWriter writer = new FileWriter(file);
+                        writeToFile(writer);
+                        writer.close();
+
+                        Desktop.getDesktop().open(file);
+                    } catch (Exception exc) {
+                        exc.printStackTrace();
+                    }
+                }
+
+            } catch (Exception exc) {
+                System.out.println(exc.getMessage());
+
+            }
+        }
+
+        private void writeToFile(FileWriter writer) {
+            try {
+                for (int i = 0; i < this.cols.length; ++i) {
+                    writer.write(cols[i]);
+                    if (i == this.cols.length - 1) writer.write('\n');
+                    else writer.write(';');
+                }
+
+                for (String[] row : this.rowData) {
+                    for (int j = 0; j < this.cols.length; ++j) {
+                        writer.write(row[j]);
+                        if (j == this.cols.length - 1) writer.write('\n');
+                        else writer.write(';');
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
 
     public static Credentials showSignInDialog(JFrame frame) {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -49,7 +119,13 @@ public class DialogHandler {
         JTable timesheet = new JTable(rowData, cols);
         JScrollPane scrollPane = new JScrollPane(timesheet);
 
+        JButton saveButton = new JButton("Save");
+        saveButton.setVisible(true);
+        saveButton.setBounds(10, 10, 20, 10);
+        saveButton.addActionListener(new SaveHandler(rowData, cols, saveButton));
+
         dialog.add(scrollPane, BorderLayout.CENTER);
+        dialog.add(saveButton, BorderLayout.SOUTH);
 
         dialog.pack();
         dialog.setLocationRelativeTo(frame);
@@ -149,14 +225,13 @@ public class DialogHandler {
         String where = null;
         String groupBy = null;
         String having = null;
-        String[] params = new String[]{};
+        String[] params = null;
         String orderBy = ("ORDER BY u.id");
 
         /* Suma godzin */
         if (inputEntries.equals("total")) {
             cols = new String[]{"employee id", "First name", "Last name", "year", "month", "total time"};
             select = new String[]{"u.id", "u.first_name", "u.last_name", "strftime('%Y', w.date)", "strftime('%m', w.date)", "SUM(w.time)"};
-            groupBy = ("GROUP BY u.id");
 
             /* Suma godzin pracy w każdym roku*/
             if (inputYear.equals("all historical data") && inputMonth.equals("yearly")) {
@@ -164,10 +239,12 @@ public class DialogHandler {
                 cols = new String[]{"employee id", "First name", "Last name", "year", "total time"};
                 select = new String[]{"u.id", "u.first_name", "u.last_name", "strftime('%Y', w.date)", "SUM(w.time)"};
                 groupBy = ("GROUP BY u.id, strftime('%Y', w.date)");
-                params = new String[]{userId};
-                
+
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is ?");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    where = ("WHERE u.id is ?");
+                    params = new String[]{userId};
+                }
             }
             /* Suma godzin pracy w każdym miesiącu*/
             else if (inputYear.equals("all historical data") /* && !inputMonth.equals("yearly")*/) {
@@ -175,10 +252,12 @@ public class DialogHandler {
                 cols = new String[]{"employee id", "First name", "Last name", "month", "total time"};
                 select = new String[]{"u.id", "u.first_name", "u.last_name", "strftime('%m', w.date)", "SUM(w.time)"};
                 groupBy = ("GROUP BY u.id, strftime('%m', w.date)");
-                params = new String[]{userId};
 
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is ?");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    where = ("WHERE u.id is ?");
+                    params = new String[]{userId};
+                }
             }
             /* Suma godzin pracy w każdym miesiącu danego roku*/
             else if (/*!inputYear.equals("all historical data") &&*/ inputMonth.equals("yearly")) {
@@ -188,9 +267,9 @@ public class DialogHandler {
                 /* Pojedynczego pracownika */
 
                 if (inputNumber.equals(SINGLE_EMPLOYEE)) {
-                    params = new String[]{userId};
                     where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
                             " and u.id is ?");
+                    params = new String[]{userId};
                 }
             }
             /* Suma godzin pracy w danym roku i miesiącu*/
@@ -199,13 +278,13 @@ public class DialogHandler {
                 where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "' " +
                         "and strftime('%m', w.date) = '" + inputMonth + "'");
                 groupBy = ("GROUP BY u.id, strftime('%m', w.date)");
-                /* Pojedynczego pracownika */
 
+                /* Pojedynczego pracownika */
                 if (inputNumber.equals(SINGLE_EMPLOYEE)) {
-                    params = new String[]{userId};
                     where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
                             " and strftime('%m', w.date) = '" + inputMonth + "'" +
                             " and u.id is ?");
+                    params = new String[]{userId};
                 }
             }
 
@@ -315,4 +394,46 @@ public class DialogHandler {
         outputTable.setVisible(true);
 
     }
+
+    public static void showProjects(JFrame frame) {
+        String[] projectSelector = new String[]{"all historical data", "active", "finished"};
+        String inputSelector = (String) JOptionPane.showInputDialog(null,
+                "Choose type:", "Projects", JOptionPane.QUESTION_MESSAGE,
+                null, projectSelector, projectSelector[0]);
+
+        if (inputSelector == null) return;
+
+        String[] cols = null;
+        String[] select = null;
+        String from = ("project");
+        String where = null;
+
+        if (inputSelector.equals("all historical data")) {
+            cols = new String[]{"project id", "project name", "start date", "due date", "end date", "status"};
+            select = new String[]{"id", "name", "start_date", "due_date", "end_date", "selector"};
+
+        } else if (inputSelector.equals("active")) {
+            cols = new String[]{"project id", "project name", "start date", "due date"};
+            select = new String[]{"id", "name", "start_date", "due_date"};
+            where = ("WHERE selector = 'active'");
+
+        } else /*if(inputSelector.equals("finished")*/ {
+            cols = new String[]{"project id", "project name", "start date", "end date"};
+            select = new String[]{"id", "name", "start_date", "end_date"};
+            where = ("WHERE selector = 'finished'");
+        }
+
+        Results results = Query.runQuery(select, from, where, null, null, null, null);
+        results.setCols(cols);
+
+        String title = ("Projects");
+        JDialog outputTable = setTableDialog(frame, title, results.getRowData(), results.getCols());
+        outputTable.setVisible(true);
+
+    }
+
+    public static void showProjectAssignments(JFrame frame) {
+
+    }
+
 }
