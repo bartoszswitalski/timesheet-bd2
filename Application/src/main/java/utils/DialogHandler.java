@@ -3,6 +3,8 @@ package utils;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.Properties;
+import org.jdatepicker.impl.*;
 
 public class DialogHandler {
 
@@ -44,8 +46,14 @@ public class DialogHandler {
         JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
         JTextField time = new JTextField(5);
         controls.add(time);
-        JTextField date = new JTextField(5);
-        controls.add(date);
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        controls.add(datePicker);
         JTextField task = new JTextField(5);
         controls.add(task);
         panel.add(controls, BorderLayout.CENTER);
