@@ -97,7 +97,14 @@ public class DialogHandler {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String[] new_contact = showContactDialog("");
+                if(new_contact != null) {
+                    Connect.runInsert("contact_info",
+                            new String[]{ "info", "user_id", "type" },
+                            new String[]{ "\"" + new_contact[1] + "\"",
+                                    user.getID(), "\"" + new_contact[0] + "\"" });
+                    model.addRow(new_contact);
+                }
             }
         });
         JButton editButton = new JButton("Edit contact");
@@ -106,7 +113,14 @@ public class DialogHandler {
             public void actionPerformed(ActionEvent e) {
                 int row = contacts.getSelectedRow();
                 if(row >= 0){
-
+                    String editVal = contacts.getModel().getValueAt(row, 1).toString();
+                    String[] new_contact = showContactDialog(editVal);
+                    Connect.runUpdate("contact_info",
+                            new String[]{ "info", "type" },
+                            new String[]{ "\"" + new_contact[1] + "\"",  "\"" + new_contact[0] + "\""},
+                            " WHERE info = " + "\"" + editVal + "\"");
+                    contacts.setValueAt(new_contact[0], row, 0);
+                    contacts.setValueAt(new_contact[1], row, 1);
                 } else {
                     DialogHandler.showConfirmDialog(frame,
                             "You did not select any of the contact forms possible!", "Message");
@@ -160,7 +174,7 @@ public class DialogHandler {
         employeesList.setVisible(true);
     }
 
-    public static void showContactDialog() {
+    public static String[] showContactDialog(String val) {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
         label.add(new JLabel("Type:", SwingConstants.RIGHT));
         label.add(new JLabel("Value:", SwingConstants.RIGHT));
@@ -169,17 +183,27 @@ public class DialogHandler {
         panel.add(label, BorderLayout.WEST);
 
         JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        Results contact_types = Connect.runQuery(
+                new String[]{"type"},
+                "contact_info_type", "");
         DefaultComboBoxModel list = new DefaultComboBoxModel();
+        for(int i = 0; i < contact_types.getRowData().length; i++) {
+            list.addElement(contact_types.getRowData()[i][0]);
+        }
         JComboBox types = new JComboBox(list);
+        controls.add(types);
+
         JTextField value = new JTextField(5);
+        value.setText(val);
         controls.add(value);
         panel.add(controls, BorderLayout.CENTER);
 
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Add contact", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            // to be implemented
+            return new String[]{ types.getSelectedItem().toString(), value.getText() };
         }
+        return null;
     }
 
     public static void showConfirmDialog(JFrame frame, String message, String title) {
