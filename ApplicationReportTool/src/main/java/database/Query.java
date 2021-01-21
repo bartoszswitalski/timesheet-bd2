@@ -29,24 +29,44 @@ public class Query {
         }
     }
 
-    public static Results runQuery(String[] cols, String table, String where) {
+    public static Results runQuery(String[] select,
+                                   String from,
+                                   String where,
+                                   String groupBy,
+                                   String having,
+                                   String orderBy) {
+
         Connection conn = Query.connect();
         ArrayList<String[]> results = new ArrayList<String[]>();
-        int colsLength = cols.length;
+        int colsLength = select.length;
 
         // CONSTRUCT QUERY
-        String query = new String("SELECT ");
+        String query = ("SELECT ");
         for (int i = 0; i < colsLength; ++i) {
-            query += cols[i];
+            query += select[i];
             if (i < colsLength - 1) query += ", ";
         }
         query += " FROM ";
-        query += table;
-        if (!where.equals("")) {
+        query += from;
+        if (where != null) {
             query += ' ';
             query += where;
         }
 
+        if (groupBy != null) {
+            query += ' ';
+            query += groupBy;
+        }
+
+        if (having != null) {
+            query += ' ';
+            query += having;
+        }
+
+        if (orderBy != null) {
+            query += ' ';
+            query += orderBy;
+        }
         query += ';';
 
         System.out.println(query);

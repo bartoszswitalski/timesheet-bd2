@@ -55,9 +55,9 @@ public class AppFrame extends JFrame {
 
         menu.addSeparator();
 
-        JMenuItem monthTimesheet = new JMenuItem("Get monthly timesheet (3)");
-        monthTimesheet.addActionListener(e -> monthTimesheetList());
-        menu.add(monthTimesheet);
+        JMenuItem filterTimesheet = new JMenuItem("Filter timesheets data (3)");
+        filterTimesheet.addActionListener(e -> filterTimesheet());
+        menu.add(filterTimesheet);
 
         menu.addSeparator();
 
@@ -94,7 +94,7 @@ public class AppFrame extends JFrame {
                     case KeyEvent.VK_X -> System.exit(0);
                     case KeyEvent.VK_1 -> employeesList();
                     case KeyEvent.VK_2 -> timesheetList();
-                    case KeyEvent.VK_3 -> monthTimesheetList();
+                    case KeyEvent.VK_3 -> filterTimesheet();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
                             "Version 1.0 " + '\n' + "\u00a9 2020", "About");
                 }
@@ -111,12 +111,10 @@ public class AppFrame extends JFrame {
         this.credentials = DialogHandler.showSignInDialog(this);
         Results results = Query.runQuery(
                 /* SELECT */ new String[]{"login", "password", "type", "department_id"},
-                /* FROM */ new String("user"),
-                new String("WHERE login is \"" + this.credentials.getLogin()
-                        + "\" and password is \"" + this.credentials.getPassword() + "\""));
-
-        this.credentials.setRole(results.getTopResult(ROLE));
-        this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
+                /* FROM */ ("user"),
+                ("WHERE login is \"" + this.credentials.getLogin()
+                        + "\" and password is \"" + this.credentials.getPassword() + "\""),
+                null, null, null);
 
         if (results.isEmpty()
                 || (!results.getTopResult(ROLE).equals("manager")
@@ -124,6 +122,9 @@ public class AppFrame extends JFrame {
 
             login();
         }
+
+        this.credentials.setRole(results.getTopResult(ROLE));
+        this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
 
     }
 
@@ -139,8 +140,8 @@ public class AppFrame extends JFrame {
         DialogHandler.showTimesheetDialog(this);
     }
 
-    private void monthTimesheetList() {
-        DialogHandler.showMonthlyTimesheetDialog(this);
+    private void filterTimesheet() {
+        DialogHandler.showFilteredTimesheetDialog(this);
     }
 
 }

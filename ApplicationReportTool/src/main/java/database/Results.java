@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Results {
     private ArrayList<String[]> results;
+    private String[] cols;
 
     public Results(ArrayList<String[]> results) {
         this.results = results;
@@ -34,4 +35,13 @@ public class Results {
     public void setResults(ArrayList<String[]> results) {
         this.results = results;
     }
+
+    public String[] getCols() {
+        return this.cols;
+    }
+
+    public void setCols(String[] cols) {
+        this.cols = cols;
+    }
+
 }
