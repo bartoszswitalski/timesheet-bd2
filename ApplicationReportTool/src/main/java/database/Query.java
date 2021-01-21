@@ -34,7 +34,8 @@ public class Query {
                                    String where,
                                    String groupBy,
                                    String having,
-                                   String orderBy) {
+                                   String orderBy,
+                                   String[] params) {
 
         Connection conn = Query.connect();
         ArrayList<String[]> results = new ArrayList<String[]>();
@@ -72,8 +73,11 @@ public class Query {
         System.out.println(query);
         // TRY QUERY
         try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            for(int i = 0; i < params.length; i++) {
+                stmt.setString(i+1, params[i]);
+            }
+            ResultSet rs = stmt.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
 
             while (rs.next()) {

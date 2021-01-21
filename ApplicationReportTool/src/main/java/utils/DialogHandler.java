@@ -60,16 +60,17 @@ public class DialogHandler {
 
     public static void showEmployeesDialog(JFrame frame, String departmentId) {
         String[] cols = new String[]{"id", "first_name", "last_name", "type"};
+        String[] params = new String[]{departmentId};
 
         Results results = Query.runQuery(
                 /* SELECT */cols,
                 /* FROM */ ("user"),
-                ("WHERE department_id = " + departmentId), null, null, null);
+                ("WHERE department_id = ?"), null, null, null, params);
 
         Results departmentName = Query.runQuery(
                 /* SELECT */ new String[]{"name"},
                 /* FROM */ ("department"),
-                ("WHERE id = " + departmentId), null, null, null);
+                ("WHERE id = ?"), null, null, null, params);
 
         String title = ("Employees of department " + departmentName.getTopResult(0));
 
@@ -80,11 +81,12 @@ public class DialogHandler {
 
     public static void showEmployeesDialogAdmin(JFrame frame) {
         String[] cols = new String[]{"id", "first_name", "last_name", "type"};
+        String[] params = new String[]{};
 
         Results results = Query.runQuery(
                 /* SELECT */cols,
                 /* FROM */ ("user"),
-                null, null, null, null);
+                null, null, null, null, params);
 
         String title = ("Employees of the company");
 
@@ -123,11 +125,12 @@ public class DialogHandler {
 
         String[] cols = new String[]{"employee id", "First name", "Last name", "date", "time", "task"};
         String[] queryCols = new String[]{"u.id", "u.first_name", "u.last_name", "w.date", "w.time", "t.name"};
+        String[] params = new String[]{userId};
 
         Results results = Query.runQuery(
                 /* SELECT */ queryCols,
                 /* FROM */ ("user u JOIN task t ON u.id = t.user_id JOIN work_time w ON w.task_id = t.id"),
-                ("WHERE u.id is \"" + userId + "\""), null, null, null);
+                ("WHERE u.id is ?"), null, null, null, params);
 
         String title = ("Timesheet of user id = " + userId);
 
@@ -146,6 +149,7 @@ public class DialogHandler {
         String where = null;
         String groupBy = null;
         String having = null;
+        String[] params = new String[]{};
         String orderBy = ("ORDER BY u.id");
 
         /* Suma godzin */
@@ -160,9 +164,10 @@ public class DialogHandler {
                 cols = new String[]{"employee id", "First name", "Last name", "year", "total time"};
                 select = new String[]{"u.id", "u.first_name", "u.last_name", "strftime('%Y', w.date)", "SUM(w.time)"};
                 groupBy = ("GROUP BY u.id, strftime('%Y', w.date)");
-
+                params = new String[]{userId};
+                
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\"");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is ?");
             }
             /* Suma godzin pracy w każdym miesiącu*/
             else if (inputYear.equals("all historical data") /* && !inputMonth.equals("yearly")*/) {
@@ -170,9 +175,10 @@ public class DialogHandler {
                 cols = new String[]{"employee id", "First name", "Last name", "month", "total time"};
                 select = new String[]{"u.id", "u.first_name", "u.last_name", "strftime('%m', w.date)", "SUM(w.time)"};
                 groupBy = ("GROUP BY u.id, strftime('%m', w.date)");
+                params = new String[]{userId};
 
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\"");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is ?");
             }
             /* Suma godzin pracy w każdym miesiącu danego roku*/
             else if (/*!inputYear.equals("all historical data") &&*/ inputMonth.equals("yearly")) {
@@ -181,8 +187,11 @@ public class DialogHandler {
                 groupBy = ("GROUP BY u.id, strftime('%m', w.date)");
                 /* Pojedynczego pracownika */
 
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
-                        " and u.id is \"" + userId + "\"");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
+                            " and u.id is ?");
+                }
             }
             /* Suma godzin pracy w danym roku i miesiącu*/
             else {
@@ -192,9 +201,12 @@ public class DialogHandler {
                 groupBy = ("GROUP BY u.id, strftime('%m', w.date)");
                 /* Pojedynczego pracownika */
 
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
-                        " and strftime('%m', w.date) = '" + inputMonth + "'" +
-                        " and u.id is \"" + userId + "\"");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'" +
+                            " and strftime('%m', w.date) = '" + inputMonth + "'" +
+                            " and u.id is ?");
+                }
             }
 
 
@@ -210,37 +222,46 @@ public class DialogHandler {
                         "and strftime('%m', w.date) = '" + inputMonth + "'");
 
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\" " +
-                        "and strftime('%Y', w.date) = '" + inputYear + "' " +
-                        "and strftime('%m', w.date) = '" + inputMonth + "'");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE u.id is ? and strftime('%Y', w.date) = '" + inputYear + "' " +
+                            "and strftime('%m', w.date) = '" + inputMonth + "'");
+                }
             }
             /* Pojedyczne wpisy w konkretnym roku */
             else if (!inputYear.equals("all historical data") /*&& inputMonth.equals("yearly")*/) {
                 /* Wszystkich pracowników */
                 where = ("WHERE strftime('%Y', w.date) = '" + inputYear + "'");
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\" " +
-                        "and strftime('%Y', w.date) = '" + inputYear + "'");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE u.id is ? and strftime('%Y', w.date) = '" + inputYear + "'");
+                }
             }
             /* Pojedyncze wpisy w całej historii w ustalonym miesiącu */
             else if (/*inputYear.equals("all historical data") &&*/ !inputMonth.equals("yearly")) {
                 /* Wszystkich pracowników */
                 where = ("WHERE strftime('%m', w.date) = '" + inputMonth + "'");
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\" " +
-                        "and strftime('%m', w.date) = '" + inputMonth + "'");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE u.id is ? and strftime('%m', w.date) = '" + inputMonth + "'");
+                }
             }
             /* Pojedyncze wpisy w całej historii */
             else /* */ {
                 /* Wszystkich pracowników */
                 // nothing needed
                 /* Pojedynczego pracownika */
-                if (inputNumber.equals(SINGLE_EMPLOYEE)) where = ("WHERE u.id is \"" + userId + "\"");
+                if (inputNumber.equals(SINGLE_EMPLOYEE)) {
+                    params = new String[]{userId};
+                    where = ("WHERE u.id is ?");
+                }
             }
 
         }
 
-        Results results = Query.runQuery(select, from, where, groupBy, having, orderBy);
+        Results results = Query.runQuery(select, from, where, groupBy, having, orderBy, params);
         results.setCols(cols);
 
         return results;

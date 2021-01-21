@@ -109,12 +109,12 @@ public class AppFrame extends JFrame {
 
     private void login() {
         this.credentials = DialogHandler.showSignInDialog(this);
+        String[] params = new String[]{this.credentials.getLogin(), this.credentials.getPassword()};
         Results results = Query.runQuery(
                 /* SELECT */ new String[]{"login", "password", "type", "department_id"},
                 /* FROM */ ("user"),
-                ("WHERE login is \"" + this.credentials.getLogin()
-                        + "\" and password is \"" + this.credentials.getPassword() + "\""),
-                null, null, null);
+                ("WHERE login is ? and password is ?"),
+                null, null, null, params);
 
         if (results.isEmpty()
                 || (!results.getTopResult(ROLE).equals("manager")
