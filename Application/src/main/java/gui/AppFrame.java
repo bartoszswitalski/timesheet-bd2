@@ -139,12 +139,13 @@ public class AppFrame extends JFrame {
     private void login() {
         this.user = DialogHandler.showSignInDialog(this);
         Results results = Connect.runQuery(
-                /* SELECT */ new String[]{"login", "password", "type", "department_id"},
+                /* SELECT */ new String[]{"id", "login", "password", "type", "department_id"},
                 /* FROM */ new String("user"),
                 new String("WHERE login is \"" + this.user.getLogin()
                         + "\" and password is \"" + this.user.getPassword() + "\""));
 
         //this.user.setDepartmentId(results.getTopResult(3));
+        this.user.setID(results.getTopResult(0));
         this.user.setRole(results.getTopResult(2));
 
         if (results.isEmpty()) {
@@ -168,8 +169,7 @@ public class AppFrame extends JFrame {
     }
 
     private void manageAccount() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder");
+        DialogHandler.showAccountDialog(this, user);
     }
 
     private void addUser() {

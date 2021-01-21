@@ -76,4 +76,63 @@ public class Connect {
         Connect.disconnect(conn);
         return new Results(results);
     }
+
+    public static void runInsert(String table, String[] cols, String[] values) {
+        Connection conn = Connect.connect();
+        int colsLength = cols.length;
+
+        // CONSTRUCT QUERY
+        String query = new String("INSERT INTO ");
+        query += table + " (";
+        for (int i = 0; i < colsLength; ++i) {
+            query += cols[i];
+            if (i < colsLength - 1) query += ", ";
+        }
+        query += " VALUES " + "(";
+        query += table;
+        for (int i = 0; i < colsLength; ++i) {
+            query += values[i];
+            if (i < colsLength - 1) query += ", ";
+        }
+        query += ")";
+
+        query += ';';
+
+        System.out.println(query);
+        // TRY QUERY
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Connect.disconnect(conn);
+    }
+
+    public static void runDelete(String table, String where) {
+        Connection conn = Connect.connect();
+
+        // CONSTRUCT QUERY
+        String query = new String("DELETE FROM ");
+        query += table;
+        if (!where.equals("")) {
+            query += ' ';
+            query += where;
+        }
+        query += ';';
+        System.out.println(query);
+
+        // TRY QUERY
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Connect.disconnect(conn);
+    }
 }
