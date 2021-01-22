@@ -29,7 +29,7 @@ public class Connect {
         }
     }
 
-    public static Results runQuery(String[] cols, String table, String where) {
+    public static Results runQuery(String[] cols, String table, String where, String[] parameters) {
         Connection conn = Connect.connect();
         ArrayList<String[]> results = new ArrayList<String[]>();
         int colsLength = cols.length;
@@ -52,8 +52,12 @@ public class Connect {
         System.out.println(query);
         // TRY QUERY
         try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            for(int i = 0; i < parameters.length; i++) {
+                stmt.setString(i+1, parameters[i]);
+            }
+
+            ResultSet rs = stmt.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
 
             while (rs.next()) {
@@ -75,5 +79,101 @@ public class Connect {
 
         Connect.disconnect(conn);
         return new Results(results);
+    }
+
+    public static void runInsert(String table, String[] cols, String[] values, String[] parameters) {
+        Connection conn = Connect.connect();
+        int colsLength = cols.length;
+
+        // CONSTRUCT QUERY
+        String query = new String("INSERT INTO ");
+        query += table + " (";
+        for (int i = 0; i < colsLength; ++i) {
+            query += cols[i];
+            if (i < colsLength - 1) query += ", ";
+        }
+        query += ") VALUES " + "(";
+        for (int i = 0; i < colsLength; ++i) {
+            query += values[i];
+            if (i < colsLength - 1) query += ", ";
+        }
+        query += ")";
+
+        query += ';';
+
+        System.out.println(query);
+        // TRY QUERY
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            for(int i = 0; i < parameters.length; i++) {
+                stmt.setString(i+1, parameters[i]);
+            }
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Connect.disconnect(conn);
+    }
+
+    public static void runUpdate(String table, String[] cols, String[] values, String where, String[] parameters) {
+        Connection conn = Connect.connect();
+        int colsLength = cols.length;
+
+        // CONSTRUCT QUERY
+        String query = new String("UPDATE ");
+        query += table;
+        query += " SET ";
+        for (int i = 0; i < colsLength; ++i) {
+            query += cols[i] + " = " + values[i];
+            if (i < colsLength - 1) query += ", ";
+        }
+        query += where;
+
+        query += ';';
+
+        System.out.println(query);
+        // TRY QUERY
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            for(int i = 0; i < parameters.length; i++) {
+                stmt.setString(i+1, parameters[i]);
+            }
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Connect.disconnect(conn);
+    }
+
+    public static void runDelete(String table, String where, String[] parameters) {
+        Connection conn = Connect.connect();
+
+        // CONSTRUCT QUERY
+        String query = new String("DELETE FROM ");
+        query += table;
+        if (!where.equals("")) {
+            query += ' ';
+            query += where;
+        }
+        query += ';';
+        System.out.println(query);
+
+        // TRY QUERY
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            for(int i = 0; i < parameters.length; i++) {
+                stmt.setString(i+1, parameters[i]);
+            }
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Connect.disconnect(conn);
     }
 }

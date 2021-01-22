@@ -1,8 +1,17 @@
 package utils;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.Properties;
+
+import core.Connect;
+import core.Results;
+import org.jdatepicker.impl.*;
 
 public class DialogHandler {
 
@@ -30,6 +39,293 @@ public class DialogHandler {
         }
 
         return new User(login.getText(), new String(password.getPassword()));
+    }
+
+    public static void showTimeRegistrationDialog(JFrame frame) {
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Time", SwingConstants.RIGHT));
+        label.add(new JLabel("Date", SwingConstants.RIGHT));
+        label.add(new JLabel("Task", SwingConstants.RIGHT));
+
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField time = new JTextField(5);
+        controls.add(time);
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        controls.add(datePicker);
+        JTextField task = new JTextField(5);
+        controls.add(task);
+        panel.add(controls, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(frame, panel,
+                "Register time", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            // to be implemented
+        }
+    }
+
+    private static JDialog setAccountDialog(JFrame frame, User user, String title, String[][] rowData, String[] cols) {
+        JDialog dialog = new JDialog(frame, title);
+        String[] parameters = new String[]{user.getID()};
+
+        String[] colsUser = new String[]{"first_name", "last_name", "type"};
+        Results results = Connect.runQuery(
+                /* SELECT */colsUser,
+                /* FROM */ new String("user u"),
+                new String("WHERE u.id is ?"), parameters);
+
+        JPanel label = new JPanel(new GridLayout(0, 3, 2, 2));
+        label.add(new JLabel("Name: " + results.getTopResult(0), SwingConstants.LEFT));
+        label.add(new JLabel("Surname: " + results.getTopResult(1), SwingConstants.CENTER));
+        label.add(new JLabel("Role: " + results.getTopResult(2), SwingConstants.RIGHT));
+        label.add(new JLabel("Contact", SwingConstants.LEFT));
+        dialog.add(label, BorderLayout.NORTH);
+
+        DefaultTableModel model = new DefaultTableModel(rowData, cols);
+        JTable contacts = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(contacts);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel options = new JPanel(new GridLayout(0, 3, 2, 2));
+        JButton addButton = new JButton("Add contact");
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] new_contact = showContactDialog("");
+                if(new_contact != null) {
+                    Connect.runInsert("contact_info",
+                            new String[]{ "info", "user_id", "type" },
+                            new String[]{ "?", "?", "?"},
+                            new String[]{new_contact[1], user.getID(), new_contact[0]});
+                    model.addRow(new_contact);
+                }
+            }
+        });
+        JButton editButton = new JButton("Edit contact");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = contacts.getSelectedRow();
+                if(row >= 0){
+                    String editVal = contacts.getModel().getValueAt(row, 1).toString();
+                    String[] new_contact = showContactDialog(editVal);
+                    Connect.runUpdate("contact_info",
+                            new String[]{ "info", "type" },
+                            new String[]{ "?", "?"},
+                            " WHERE info = ?",
+                            new String[]{new_contact[1], new_contact[0], editVal});
+                    contacts.setValueAt(new_contact[0], row, 0);
+                    contacts.setValueAt(new_contact[1], row, 1);
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        JButton deleteButton = new JButton("Delete contact");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = contacts.getSelectedRow();
+                if(row >= 0){
+                    int check = JOptionPane.showConfirmDialog(null,
+                            "Are you sure?", "Delete", JOptionPane.OK_CANCEL_OPTION);
+
+                    if(check == JOptionPane.OK_OPTION) {
+                        Connect.runDelete("contact_info",
+                                "WHERE info = ?",
+                                new String[]{contacts.getModel().getValueAt(row, 1).toString()});
+                        ((DefaultTableModel)contacts.getModel()).removeRow(row);
+                    }
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(addButton);
+        options.add(editButton);
+        options.add(deleteButton);
+        dialog.add(options, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(frame);
+
+        return dialog;
+    }
+
+    public static void showAccountDialog(JFrame frame, User user) {
+        String[] cols = new String[]{"type", "info"};
+        String[] parameters = new String[]{user.getID()};
+
+        Results results = Connect.runQuery(
+                /* SELECT */cols,
+                /* FROM */ new String("contact_info ci"),
+                new String("WHERE ci.user_id is ?"), parameters);
+
+        String title = new String("Account");
+
+        JDialog employeesList = setAccountDialog(frame, user, title, results.getRowData(), cols);
+
+        employeesList.setVisible(true);
+    }
+
+    public static String[] showContactDialog(String val) {
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Type:", SwingConstants.RIGHT));
+        label.add(new JLabel("Value:", SwingConstants.RIGHT));
+
+        panel.add(label, BorderLayout.WEST);
+
+        String[] parameters = new String[]{};
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        Results contact_types = Connect.runQuery(
+                new String[]{"type"},
+                "contact_info_type", "", parameters);
+        DefaultComboBoxModel list = new DefaultComboBoxModel();
+        for(int i = 0; i < contact_types.getRowData().length; i++) {
+            list.addElement(contact_types.getRowData()[i][0]);
+        }
+        JComboBox types = new JComboBox(list);
+        controls.add(types);
+
+        JTextField value = new JTextField(5);
+        value.setText(val);
+        controls.add(value);
+        panel.add(controls, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Add contact", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            return new String[]{ types.getSelectedItem().toString(), value.getText() };
+        }
+        return null;
+    }
+
+    public static void showNewEmployeeDialog() {
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel rightControls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JPanel leftControls = new JPanel(new GridLayout(0, 1, 2, 2));
+
+        rightControls.add(new JLabel("Name:", SwingConstants.LEFT));
+        JTextField valueName = new JTextField(10);
+        rightControls.add(valueName);
+        rightControls.add(new JLabel("Login:", SwingConstants.LEFT));
+        JTextField valueLogin = new JTextField(10);
+        rightControls.add(valueLogin);
+        rightControls.add(new JLabel("Department:", SwingConstants.LEFT));
+        String[] parameters = new String[]{};
+        Results departs = Connect.runQuery(
+                new String[]{"id"},
+                "department", "", parameters);
+        DefaultComboBoxModel listDeparts = new DefaultComboBoxModel();
+        for(int i = 0; i < departs.getRowData().length; i++) {
+            listDeparts.addElement(departs.getRowData()[i][0]);
+        }
+        JComboBox valueDepart = new JComboBox(listDeparts);
+        rightControls.add(valueDepart);
+
+        leftControls.add(new JLabel("Last name:", SwingConstants.LEFT));
+        JTextField valueSurname = new JTextField(10);
+        leftControls.add(valueSurname);
+        leftControls.add(new JLabel("Password:", SwingConstants.LEFT));
+        JTextField valuePass = new JTextField(10);
+        leftControls.add(valuePass);
+        leftControls.add(new JLabel("Role:", SwingConstants.LEFT));
+        Results roleTypes = Connect.runQuery(
+                new String[]{"type"},
+                "user_type", "", parameters);
+        DefaultComboBoxModel listRoles = new DefaultComboBoxModel();
+        for(int i = 0; i < roleTypes.getRowData().length; i++) {
+            listRoles.addElement(roleTypes.getRowData()[i][0]);
+        }
+        JComboBox types = new JComboBox(listRoles);
+        leftControls.add(types);
+
+        panel.add(rightControls, BorderLayout.WEST);
+        panel.add(leftControls, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Add employee", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            if(valueName.getText().equals("") || valueSurname.getText().equals("")
+                    || valueLogin.getText().equals("") || valuePass.getText().equals("")) {
+                showConfirmDialog(null, "Not all fields have been filled up!", "Error");
+            } else {
+                String[] cols = {"first_name", "last_name", "type", "department_id", "login", "password"};
+                String[] vals = {"?", "?", "?", "?", "?", "?"};
+                String[] params = {valueName.getText(), valueSurname.getText(), Objects.requireNonNull(types.getSelectedItem()).toString(),
+                        Objects.requireNonNull(valueDepart.getSelectedItem()).toString(), valueLogin.getText(), valuePass.getText()};
+                Connect.runInsert("user", cols, vals, params);
+                showConfirmDialog(null, "Successfully added new employee!", "Success");
+            }
+        }
+    }
+
+    private static JDialog setDeleteEmpDialog(JFrame frame, String title, String[][] rowData, String[] cols) {
+        JDialog dialog = new JDialog(frame, title);
+
+        DefaultTableModel model = new DefaultTableModel(rowData, cols);
+        JTable accounts = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(accounts);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel options = new JPanel(new GridLayout(0, 3, 2, 2));
+        JButton deleteButton = new JButton("Delete account");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = accounts.getSelectedRow();
+                if(row >= 0){
+                    int check = JOptionPane.showConfirmDialog(null,
+                            "Are you sure?", "Delete", JOptionPane.OK_CANCEL_OPTION);
+
+                    if(check == JOptionPane.OK_OPTION) {
+                        Connect.runDelete("user",
+                                "WHERE id = ?",
+                                        new String[]{accounts.getModel().getValueAt(row, 0).toString()});
+                        ((DefaultTableModel)accounts.getModel()).removeRow(row);
+                    }
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(deleteButton);
+        dialog.add(options, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(frame);
+
+        return dialog;
+    }
+
+    public static void showDeleteEmpDialog(JFrame frame) {
+        String[] cols = new String[]{"id", "first_name", "last_name", "type"};
+
+        String[] parameters = new String[]{};
+
+        Results results = Connect.runQuery(
+                /* SELECT */cols,
+                /* FROM */ new String("user"),
+                "", parameters);
+
+        String title = new String("Delete");
+        JDialog employeesList = setDeleteEmpDialog(frame, title, results.getRowData(), cols);
+
+        employeesList.setVisible(true);
     }
 
     public static void showConfirmDialog(JFrame frame, String message, String title) {
