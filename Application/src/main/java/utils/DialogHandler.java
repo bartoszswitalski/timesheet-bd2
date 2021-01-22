@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -82,7 +83,7 @@ public class DialogHandler {
         Results results = Connect.runQuery(
                 /* SELECT */colsUser,
                 /* FROM */ new String("user u"),
-                new String("WHERE u.id is ?"), parameters);
+                new String(" WHERE u.id is ?"), parameters);
 
         JPanel label = new JPanel(new GridLayout(0, 3, 2, 2));
         label.add(new JLabel("Name: " + results.getTopResult(0), SwingConstants.LEFT));
@@ -143,7 +144,7 @@ public class DialogHandler {
 
                     if(check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("contact_info",
-                                "WHERE info = ?",
+                                " WHERE info = ?",
                                 new String[]{contacts.getModel().getValueAt(row, 1).toString()});
                         ((DefaultTableModel)contacts.getModel()).removeRow(row);
                     }
@@ -171,7 +172,7 @@ public class DialogHandler {
         Results results = Connect.runQuery(
                 /* SELECT */cols,
                 /* FROM */ new String("contact_info ci"),
-                new String("WHERE ci.user_id is ?"), parameters);
+                new String(" WHERE ci.user_id is ?"), parameters);
 
         String title = new String("Account");
 
@@ -253,6 +254,7 @@ public class DialogHandler {
     }
 
     private static JDialog setEditProjectDialog(JFrame frame, String title, String[][] rowData, String[] cols) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         JDialog dialog = new JDialog(frame, title);
 
         DefaultTableModel model = new DefaultTableModel(rowData, cols);
@@ -267,7 +269,9 @@ public class DialogHandler {
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
                 if(row >= 0){
-
+                    showEditSelectedProjDialog(null,
+                            projects.getModel().getValueAt(row, 0).toString(),
+                            projects.getModel().getValueAt(row, 1).toString());
                 } else {
                     DialogHandler.showConfirmDialog(frame,
                             "You did not select any of the contact forms possible!", "Message");
@@ -313,13 +317,12 @@ public class DialogHandler {
                             "Are you sure?", "Finished", JOptionPane.OK_CANCEL_OPTION);
 
                     if(check == JOptionPane.OK_OPTION) {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                         LocalDateTime now = LocalDateTime.now();
                         String[] cols = {"due_date", "end_date", "selector"};
                         String[] vals = {"?", "?", "?"};
                         String[] params = {null, dtf.format(now), "finished"};
                         Connect.runUpdate("project", cols, vals,
-                                "WHERE id = "+"\""+projects.getModel().getValueAt(row, 0)+"\"",
+                                " WHERE id = "+"\""+projects.getModel().getValueAt(row, 0)+"\"",
                                 params);
                         projects.getModel().setValueAt(null, row, 3);
                         projects.getModel().setValueAt(dtf.format(now), row, 4);
@@ -355,6 +358,39 @@ public class DialogHandler {
         JDialog employeesList = setEditProjectDialog(frame, title, results.getRowData(), cols);
 
         employeesList.setVisible(true);
+    }
+
+    public static void showEditSelectedProjDialog(JFrame frame, String id, String projName) {
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Name", SwingConstants.RIGHT));
+        label.add(new JLabel("End date", SwingConstants.RIGHT));
+
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField name = new JTextField(5);
+        name.setText(projName);
+        controls.add(name);
+        SqlDateModel modelEnd = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl endPanel = new JDatePanelImpl(modelEnd, p);
+        JDatePickerImpl endPicker = new JDatePickerImpl(endPanel, new DateLabelFormatter());
+        controls.add(endPicker);
+        panel.add(controls, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(frame, panel,
+                "Add new project", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String[] cols = {"due_date"};
+            String[] vals = {"?"};
+            String[] params = {endPicker.getModel().getValue().toString()};
+            Connect.runUpdate("project", cols, vals, " WHERE id = "+id+" ", params);
+            showConfirmDialog(null, "Successfully edited project!", "Success");
+        }
     }
 
     public static void showNewEmployeeDialog() {
@@ -426,7 +462,7 @@ public class DialogHandler {
         JScrollPane scrollPane = new JScrollPane(accounts);
         dialog.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel options = new JPanel(new GridLayout(0, 3, 2, 2));
+        JPanel options = new JPanel(new GridLayout(0, 1, 2, 2));
         JButton deleteButton = new JButton("Delete account");
         deleteButton.addActionListener(new ActionListener() {
             @Override
@@ -438,7 +474,7 @@ public class DialogHandler {
 
                     if(check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("user",
-                                "WHERE id = ?",
+                                " WHERE id = ?",
                                         new String[]{accounts.getModel().getValueAt(row, 0).toString()});
                         ((DefaultTableModel)accounts.getModel()).removeRow(row);
                     }
