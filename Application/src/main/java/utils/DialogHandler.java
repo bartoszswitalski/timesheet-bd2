@@ -71,7 +71,11 @@ public class DialogHandler {
         int result = JOptionPane.showConfirmDialog(frame, panel,
                 "Register time", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            // to be implemented
+            String[] cols = {"task_id", "date", "time"};
+            String[] vals = {"?", "?", "?"};
+            String[] params = {task.getText(), datePicker.getJFormattedTextField().getText(), time.getText()};
+            Connect.runInsert("work_time", cols, vals, params);
+            showConfirmDialog(frame, "Successfully added new time input!", "Success");
         }
     }
 
@@ -210,7 +214,7 @@ public class DialogHandler {
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Add contact", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            return new String[]{ types.getSelectedItem().toString(), value.getText() };
+            return new String[]{ Objects.requireNonNull(types.getSelectedItem()).toString(), value.getText() };
         }
         return null;
     }

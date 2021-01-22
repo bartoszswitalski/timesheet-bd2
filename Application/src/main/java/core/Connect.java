@@ -107,6 +107,7 @@ public class Connect {
             PreparedStatement stmt = conn.prepareStatement(query);
             for(int i = 0; i < parameters.length; i++) {
                 stmt.setString(i+1, parameters[i]);
+                System.out.println(parameters[i]);
             }
             stmt.executeUpdate();
 
