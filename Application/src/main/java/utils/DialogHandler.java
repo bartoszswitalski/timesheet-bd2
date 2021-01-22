@@ -450,7 +450,7 @@ public class DialogHandler {
                 String[] cols = {"first_name", "last_name", "type", "department_id", "login", "password"};
                 String[] vals = {"?", "?", "?", "?", "?", "?"};
                 String[] params = {valueName.getText(), valueSurname.getText(), Objects.requireNonNull(types.getSelectedItem()).toString(),
-                        Objects.requireNonNull(valueDepart.getSelectedItem()).toString(), valueLogin.getText(), valuePass.getText()};
+                        Objects.requireNonNull(valueDepart.getSelectedItem()).toString(), valueLogin.getText(), String.valueOf(Objects.hash(valuePass.getText()))};
                 Connect.runInsert("user", cols, vals, params);
                 showConfirmDialog(null, "Successfully added new employee!", "Success");
             }

@@ -9,6 +9,7 @@ import utils.ImageLoader;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 public class AppFrame extends JFrame {
 
@@ -17,7 +18,7 @@ public class AppFrame extends JFrame {
     private static final int DEPARTMENT = 3;
 
     public AppFrame() {
-        setTitle("SQL project");
+        setTitle("Report tool");
         setIconImage(ImageLoader.getImage("icon.png"));
         AppPanel panel = new AppPanel(ImageLoader.getImage("bg.jpg"));
         add(panel);
@@ -133,7 +134,7 @@ public class AppFrame extends JFrame {
 
     private void login() {
         this.credentials = DialogHandler.showSignInDialog(this);
-        String[] params = new String[]{this.credentials.getLogin(), this.credentials.getPassword()};
+        String[] params = new String[]{this.credentials.getLogin(), String.valueOf(Objects.hash(this.credentials.getPassword()))};
         Results results = Query.runQuery(
                 /* SELECT */ new String[]{"login", "password", "type", "department_id"},
                 /* FROM */ ("user"),

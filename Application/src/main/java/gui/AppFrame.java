@@ -9,13 +9,14 @@ import core.Results;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 public class AppFrame extends JFrame {
 
     private User user;
 
     public AppFrame() {
-        setTitle("SQL project");
+        setTitle("Access tool");
         setIconImage(ImageLoader.getImage("icon.png"));
         AppPanel panel = new AppPanel(ImageLoader.getImage("bg.jpg"));
         add(panel);
@@ -138,7 +139,7 @@ public class AppFrame extends JFrame {
 
     private void login() {
         this.user = DialogHandler.showSignInDialog(this);
-        String[] parameters = new String[]{user.getLogin(), user.getPassword()};
+        String[] parameters = new String[]{user.getLogin(), String.valueOf(Objects.hash(user.getPassword()))};
 
         Results results = Connect.runQuery(
                 /* SELECT */ new String[]{"id", "login", "password", "type", "department_id"},
