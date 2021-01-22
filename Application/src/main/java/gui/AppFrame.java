@@ -164,8 +164,7 @@ public class AppFrame extends JFrame {
 
     private void addProject() {
         if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
-            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                    "Placeholder");
+            DialogHandler.showAddProjectDialog(this);
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
                     "Message");
@@ -174,8 +173,7 @@ public class AppFrame extends JFrame {
 
     private void editProject() {
         if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
-            DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                    "Placeholder");
+            DialogHandler.showEditProjectDialog(this);
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
                     "Message");

@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -212,6 +214,149 @@ public class DialogHandler {
         return null;
     }
 
+    public static void showAddProjectDialog(JFrame frame) {
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Name", SwingConstants.RIGHT));
+        label.add(new JLabel("Start date", SwingConstants.RIGHT));
+        label.add(new JLabel("End date", SwingConstants.RIGHT));
+
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField name = new JTextField(5);
+        controls.add(name);
+        SqlDateModel modelStart = new SqlDateModel();
+        SqlDateModel modelEnd = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl startPanel = new JDatePanelImpl(modelStart, p);
+        JDatePanelImpl endPanel = new JDatePanelImpl(modelEnd, p);
+        JDatePickerImpl startPicker = new JDatePickerImpl(startPanel, new DateLabelFormatter());
+        JDatePickerImpl endPicker = new JDatePickerImpl(endPanel, new DateLabelFormatter());
+        controls.add(startPicker);
+        controls.add(endPicker);
+        panel.add(controls, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(frame, panel,
+                "Add new project", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String[] cols = {"name", "start_date", "due_date", "end_date", "selector"};
+            String[] vals = {"?", "?", "?", "?", "?"};
+            String[] params = {name.getText(), startPicker.getModel().getValue().toString(),
+                    endPicker.getModel().getValue().toString(), null, "active"};
+            Connect.runInsert("project", cols, vals, params);
+            showConfirmDialog(null, "Successfully added new project!", "Success");
+        }
+    }
+
+    private static JDialog setEditProjectDialog(JFrame frame, String title, String[][] rowData, String[] cols) {
+        JDialog dialog = new JDialog(frame, title);
+
+        DefaultTableModel model = new DefaultTableModel(rowData, cols);
+        JTable projects = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(projects);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel options = new JPanel(new GridLayout(0, 4, 2, 2));
+        JButton editButton = new JButton("Edit");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = projects.getSelectedRow();
+                if(row >= 0){
+
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(editButton, BorderLayout.CENTER);
+        JButton addEmpButton = new JButton("Add Employee");
+        addEmpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = projects.getSelectedRow();
+                if(row >= 0){
+
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(addEmpButton, BorderLayout.CENTER);
+        JButton addTaskButton = new JButton("Add Task");
+        addTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = projects.getSelectedRow();
+                if(row >= 0){
+
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(addTaskButton, BorderLayout.CENTER);
+        JButton finishButton = new JButton("Set as finished");
+        finishButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = projects.getSelectedRow();
+                if(row >= 0){
+                    int check = JOptionPane.showConfirmDialog(null,
+                            "Are you sure?", "Finished", JOptionPane.OK_CANCEL_OPTION);
+
+                    if(check == JOptionPane.OK_OPTION) {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        LocalDateTime now = LocalDateTime.now();
+                        String[] cols = {"due_date", "end_date", "selector"};
+                        String[] vals = {"?", "?", "?"};
+                        String[] params = {null, dtf.format(now), "finished"};
+                        Connect.runUpdate("project", cols, vals,
+                                "WHERE id = "+"\""+projects.getModel().getValueAt(row, 0)+"\"",
+                                params);
+                        projects.getModel().setValueAt(null, row, 3);
+                        projects.getModel().setValueAt(dtf.format(now), row, 4);
+                        projects.getModel().setValueAt("finished", row, 5);
+                        showConfirmDialog(null, "Successfully set as finished!", "Success");
+                    }
+                } else {
+                    DialogHandler.showConfirmDialog(frame,
+                            "You did not select any of the contact forms possible!", "Message");
+                }
+            }
+        });
+        options.add(finishButton, BorderLayout.CENTER);
+        dialog.add(options, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(frame);
+
+        return dialog;
+    }
+
+    public static void showEditProjectDialog(JFrame frame) {
+        String[] cols = new String[]{"id", "name", "start_date", "due_date", "end_date", "selector"};
+
+        String[] parameters = new String[]{};
+
+        Results results = Connect.runQuery(
+                /* SELECT */cols,
+                /* FROM */ new String("project"),
+                "", parameters);
+
+        String title = new String("Edit project");
+        JDialog employeesList = setEditProjectDialog(frame, title, results.getRowData(), cols);
+
+        employeesList.setVisible(true);
+    }
+
     public static void showNewEmployeeDialog() {
         JPanel panel = new JPanel(new BorderLayout(5, 5));
 
@@ -303,7 +448,7 @@ public class DialogHandler {
                 }
             }
         });
-        options.add(deleteButton);
+        options.add(deleteButton, BorderLayout.CENTER);
         dialog.add(options, BorderLayout.SOUTH);
 
         dialog.pack();
