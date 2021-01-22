@@ -75,7 +75,6 @@ public class DialogHandler {
             String[] vals = {"?", "?", "?"};
             String[] params = {task.getText(), datePicker.getJFormattedTextField().getText(), time.getText()};
             Connect.runInsert("work_time", cols, vals, params);
-            showConfirmDialog(frame, "Successfully added new time input!", "Success");
         }
     }
 
