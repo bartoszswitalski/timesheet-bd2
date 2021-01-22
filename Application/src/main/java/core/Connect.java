@@ -3,6 +3,7 @@ package core;
 import java.sql.*;
 import java.util.ArrayList;
 import utils.User;
+import utils.DialogHandler;
 
 public class Connect {
 
@@ -14,6 +15,7 @@ public class Connect {
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
 
         return conn;
@@ -26,6 +28,7 @@ public class Connect {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
     }
 
@@ -66,15 +69,13 @@ public class Connect {
                 for (int i = 0; i < colsLength; ++i) {
                     result[i] = rs.getString(rsmd.getColumnName(i + 1));
                 }
-
                 results.add(result);
-
             }
 
             rs.close();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
 
         Connect.disconnect(conn);
@@ -113,6 +114,7 @@ public class Connect {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
 
         Connect.disconnect(conn);
@@ -145,6 +147,7 @@ public class Connect {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
 
         Connect.disconnect(conn);
@@ -173,6 +176,7 @@ public class Connect {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            DialogHandler.showConfirmDialog(null, "ERROR: " + e.getMessage(), "Error");
         }
 
         Connect.disconnect(conn);

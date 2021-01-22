@@ -222,7 +222,7 @@ public class DialogHandler {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
         label.add(new JLabel("Name", SwingConstants.RIGHT));
         label.add(new JLabel("Start date", SwingConstants.RIGHT));
-        label.add(new JLabel("End date", SwingConstants.RIGHT));
+        label.add(new JLabel("Due date", SwingConstants.RIGHT));
 
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.add(label, BorderLayout.WEST);
@@ -271,13 +271,18 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0){
-                    showEditSelectedProjDialog(null,
-                            projects.getModel().getValueAt(row, 0).toString(),
-                            projects.getModel().getValueAt(row, 1).toString());
+                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
+                    String[] results = showEditSelectedProjDialog(null,
+                                            projects.getModel().getValueAt(row, 0).toString(),
+                                            projects.getModel().getValueAt(row, 1).toString());
+                    if(results != null) {
+                        projects.getModel().setValueAt(results[0], row, 1);
+                        projects.getModel().setValueAt(results[1], row, 3);
+                        showConfirmDialog(null, "Successfully edited project!", "Success");
+                    }
                 } else {
                     DialogHandler.showConfirmDialog(frame,
-                            "You did not select any of the contact forms possible!", "Message");
+                            "You did not select any project or selected a finished one!", "Message");
                 }
             }
         });
@@ -287,11 +292,11 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0){
-
+                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
+                    showNewProjEmpDialog(projects.getModel().getValueAt(row, 0).toString());
                 } else {
                     DialogHandler.showConfirmDialog(frame,
-                            "You did not select any of the contact forms possible!", "Message");
+                            "You did not select any project or selected a finished one!", "Message");
                 }
             }
         });
@@ -301,11 +306,11 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0){
+                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
 
                 } else {
                     DialogHandler.showConfirmDialog(frame,
-                            "You did not select any of the contact forms possible!", "Message");
+                            "You did not select any project or selected a finished one!", "Message");
                 }
             }
         });
@@ -315,7 +320,7 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0){
+                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
                     int check = JOptionPane.showConfirmDialog(null,
                             "Are you sure?", "Finished", JOptionPane.OK_CANCEL_OPTION);
 
@@ -334,7 +339,7 @@ public class DialogHandler {
                     }
                 } else {
                     DialogHandler.showConfirmDialog(frame,
-                            "You did not select any of the contact forms possible!", "Message");
+                            "You did not select any project or selected a finished one!", "Message");
                 }
             }
         });
@@ -363,10 +368,10 @@ public class DialogHandler {
         employeesList.setVisible(true);
     }
 
-    public static void showEditSelectedProjDialog(JFrame frame, String id, String projName) {
+    public static String[] showEditSelectedProjDialog(JFrame frame, String id, String projName) {
         JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
         label.add(new JLabel("Name", SwingConstants.RIGHT));
-        label.add(new JLabel("End date", SwingConstants.RIGHT));
+        label.add(new JLabel("Due date", SwingConstants.RIGHT));
 
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.add(label, BorderLayout.WEST);
@@ -388,11 +393,54 @@ public class DialogHandler {
         int result = JOptionPane.showConfirmDialog(frame, panel,
                 "Add new project", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            String[] cols = {"due_date"};
-            String[] vals = {"?"};
-            String[] params = {endPicker.getModel().getValue().toString()};
+            String[] cols = {"name", "due_date"};
+            String[] vals = {"?", "?"};
+            String[] params = {name.getText(), endPicker.getModel().getValue().toString()};
             Connect.runUpdate("project", cols, vals, " WHERE id = "+id+" ", params);
-            showConfirmDialog(null, "Successfully edited project!", "Success");
+
+            return new String[]{name.getText(), endPicker.getModel().getValue().toString()};
+        }
+        return null;
+    }
+
+    public static void showNewProjEmpDialog(String id) {
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Employee", SwingConstants.RIGHT));
+        label.add(new JLabel("Role", SwingConstants.RIGHT));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel boxes = new JPanel(new GridLayout(0, 1, 2, 2));
+        String[] parameters = new String[]{};
+        Results employees = Connect.runQuery(
+                new String[]{"id", "first_name", "last_name"},
+                "user", "", parameters);
+        DefaultComboBoxModel listEmployees = new DefaultComboBoxModel();
+        for(int i = 0; i < employees.getRowData().length; i++) {
+            listEmployees.addElement(employees.getRowData()[i][1] + " " + employees.getRowData()[i][2]);
+        }
+        JComboBox employeeBox = new JComboBox(listEmployees);
+        boxes.add(employeeBox);
+
+        Results roles = Connect.runQuery(
+                new String[]{"type"},
+                "role_type", "", parameters);
+        DefaultComboBoxModel listRoles = new DefaultComboBoxModel();
+        for(int i = 0; i < roles.getRowData().length; i++) {
+            listRoles.addElement(roles.getRowData()[i][0]);
+        }
+        JComboBox rolesBox = new JComboBox(listRoles);
+        boxes.add(rolesBox);
+        panel.add(boxes, BorderLayout.CENTER);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Add new employee", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String[] cols = {"user_id", "project_id", "role_type"};
+            String[] vals = {"?", "?", "?"};
+            String[] params = { String.valueOf(employeeBox.getSelectedIndex() + 1), id,
+                    rolesBox.getSelectedItem().toString() };
+            Connect.runInsert("role_assignment", cols, vals, params);
         }
     }
 
