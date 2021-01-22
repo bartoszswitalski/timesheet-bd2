@@ -19,7 +19,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'Application'
+                'Main-Class': 'core/Application'
         )
     }
     baseName 'app'
