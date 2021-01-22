@@ -433,6 +433,115 @@ public class DialogHandler {
     }
 
     public static void showProjectAssignments(JFrame frame) {
+        String[] criterionChoices = new String[]{"user id", "project id"};
+        String inputCriterion = (String) JOptionPane.showInputDialog(null,
+                "Show by:", "Projects role assignments", JOptionPane.QUESTION_MESSAGE,
+                null, criterionChoices, criterionChoices[0]);
+
+        if (inputCriterion == null) return;
+
+        String[] cols = null;
+        String[] select = null;
+        String from = ("user u JOIN role_assignment r ON u.id = r.user_id JOIN project p ON p.id = r.project_id");
+        String where = null;
+        String[] params = null;
+        String orderBy = null;
+
+        String userId = null;
+        String projectId = null;
+        /* Przypisania usera */
+        if (inputCriterion.equals("user id")) {
+            userId = (String) JOptionPane.showInputDialog(null,
+                    "Type in user id:", "Projects role assignments", JOptionPane.QUESTION_MESSAGE,
+                    null, null, null);
+            if (userId == null) return;
+
+            cols = new String[]{"employee id", "first name", "last name", "project name", "project id", "role"};
+            select = new String[]{"u.id as userId", "u.first_name", "u.last_name", "p.name", "p.id", "r.role_type"};
+            params = new String[]{userId};
+            where = ("WHERE userId is ?");
+            orderBy = ("ORDER BY userId");
+
+        }
+        /* Przypisania do projektu */
+        else /*if (inputCriterion.equals("project id"))*/ {
+            projectId = (String) JOptionPane.showInputDialog(null,
+                    "Type in project id:", "Projects role assignments", JOptionPane.QUESTION_MESSAGE,
+                    null, null, null);
+            if (projectId == null) return;
+
+            cols = new String[]{"project id", "project name", "employee id", "first name", "last name", "role"};
+            select = new String[]{"p.id as projectId", "p.name", "u.id", "u.first_name", "u.last_name", "r.role_type"};
+            params = new String[]{projectId};
+            where = ("WHERE projectId is ?");
+            orderBy = ("ORDER BY projectId");
+
+        }
+
+        Results results = Query.runQuery(select, from, where, null, null, orderBy, params);
+        results.setCols(cols);
+
+        String title = ("Role assignments");
+        JDialog outputTable = setTableDialog(frame, title, results.getRowData(), results.getCols());
+
+        outputTable.setVisible(true);
+
+    }
+
+    public static void showTasks(JFrame frame) {
+        String[] criterionChoices = new String[]{"user id", "project id"};
+        String inputCriterion = (String) JOptionPane.showInputDialog(null,
+                "Show by:", "Tasks", JOptionPane.QUESTION_MESSAGE,
+                null, criterionChoices, criterionChoices[0]);
+
+        if (inputCriterion == null) return;
+
+        String[] cols = null;
+        String[] select = null;
+        String from = ("user u JOIN task t ON u.id = t.user_id JOIN project p ON p.id = t.project_id");
+        String where = null;
+        String[] params = null;
+        String orderBy = null;
+
+        String userId = null;
+        String projectId = null;
+
+        /* Pokaż wg id usera */
+        if (inputCriterion.equals("user id")) {
+            userId = (String) JOptionPane.showInputDialog(null,
+                    "Type in user id:", "Projects role assignments", JOptionPane.QUESTION_MESSAGE,
+                    null, null, null);
+            if (userId == null) return;
+
+            cols = new String[]{"employee id", "first name", "last name", "task name", "description", "status", "project"};
+            select = new String[]{"u.id as userId", "u.first_name", "u.last_name", "t.name", "t.description", "t.status", "p.id"};
+            params = new String[]{userId};
+            where = ("WHERE userId is ?");
+            orderBy = ("ORDER BY userId");
+
+        }
+        /* Pokaż wg id projektu */
+        else /*if (inputCriterion.equals("project id"))*/ {
+            projectId = (String) JOptionPane.showInputDialog(null,
+                    "Type in project id:", "Projects role assignments", JOptionPane.QUESTION_MESSAGE,
+                    null, null, null);
+            if (projectId == null) return;
+
+            cols = new String[]{"project id", "project name", "task name", "description", "status", "priority"};
+            select = new String[]{"p.id as projectId", "p.name", "t.name", "t.description", "t.status", "t.priority"};
+            params = new String[]{projectId};
+            where = ("WHERE projectId is ?");
+            orderBy = ("ORDER BY projectId");
+
+        }
+
+        Results results = Query.runQuery(select, from, where, null, null, orderBy, params);
+        results.setCols(cols);
+
+        String title = ("Tasks");
+        JDialog outputTable = setTableDialog(frame, title, results.getRowData(), results.getCols());
+
+        outputTable.setVisible(true);
 
     }
 

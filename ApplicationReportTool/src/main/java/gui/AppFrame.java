@@ -37,6 +37,7 @@ public class AppFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(initMainMenu());
         menuBar.add(initProjectMenu());
+        menuBar.add(initTaskMenu());
         menuBar.add(initInfoMenu());
         return menuBar;
     }
@@ -44,19 +45,19 @@ public class AppFrame extends JFrame {
     private JMenu initMainMenu() {
         JMenu menu = new JMenu("Menu");
 
-        JMenuItem employees = new JMenuItem("Department employees list (1)");
+        JMenuItem employees = new JMenuItem("Department employees list");
         employees.addActionListener(e -> employeesList());
         menu.add(employees);
 
         menu.addSeparator();
 
-        JMenuItem timesheet = new JMenuItem("Search for a timesheet (2)");
+        JMenuItem timesheet = new JMenuItem("Search for a timesheet");
         timesheet.addActionListener(e -> timesheetList());
         menu.add(timesheet);
 
         menu.addSeparator();
 
-        JMenuItem filterTimesheet = new JMenuItem("Filter timesheets data (3)");
+        JMenuItem filterTimesheet = new JMenuItem("Filter timesheets data");
         filterTimesheet.addActionListener(e -> filterTimesheet());
         menu.add(filterTimesheet);
 
@@ -84,6 +85,16 @@ public class AppFrame extends JFrame {
 
     }
 
+    private JMenu initTaskMenu() {
+        JMenu menu = new JMenu("Tasks");
+
+        JMenuItem tasksList = new JMenuItem("Show tasks list");
+        tasksList.addActionListener(e -> filterTasks());
+        menu.add(tasksList);
+
+        return menu;
+    }
+
     private JMenu initInfoMenu() {
         JMenu menu = new JMenu("Info");
 
@@ -108,9 +119,6 @@ public class AppFrame extends JFrame {
                 int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_X -> System.exit(0);
-                    case KeyEvent.VK_1 -> employeesList();
-                    case KeyEvent.VK_2 -> timesheetList();
-                    case KeyEvent.VK_3 -> filterTimesheet();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
                             "Version 1.0 " + '\n' + "\u00a9 2020", "About");
                 }
@@ -166,5 +174,9 @@ public class AppFrame extends JFrame {
 
     private void projectRoles() {
         DialogHandler.showProjectAssignments(this);
+    }
+
+    private void filterTasks() {
+        DialogHandler.showTasks(this);
     }
 }
