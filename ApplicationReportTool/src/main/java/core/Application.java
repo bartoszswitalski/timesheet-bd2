@@ -1,9 +1,6 @@
 package core;
 
 import gui.AppFrame;
-import database.Query;
-
-import java.sql.*;
 
 public class Application {
 

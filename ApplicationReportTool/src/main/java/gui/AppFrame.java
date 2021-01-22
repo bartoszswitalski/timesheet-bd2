@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 public class AppFrame extends JFrame {
 
     private Credentials credentials;
+    private static final int ROLE = 2;
+    private static final int DEPARTMENT = 3;
 
     public AppFrame() {
         setTitle("SQL project");
@@ -34,6 +36,8 @@ public class AppFrame extends JFrame {
     private JMenuBar initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(initMainMenu());
+        menuBar.add(initProjectMenu());
+        menuBar.add(initTaskMenu());
         menuBar.add(initInfoMenu());
         return menuBar;
     }
@@ -41,27 +45,52 @@ public class AppFrame extends JFrame {
     private JMenu initMainMenu() {
         JMenu menu = new JMenu("Menu");
 
-        JMenuItem employees = new JMenuItem("Department employees list (1)");
+        JMenuItem employees = new JMenuItem("Department employees list");
         employees.addActionListener(e -> employeesList());
         menu.add(employees);
 
         menu.addSeparator();
 
-        JMenuItem timesheet = new JMenuItem("Search for a timesheet (2)");
+        JMenuItem timesheet = new JMenuItem("Search for a timesheet");
         timesheet.addActionListener(e -> timesheetList());
         menu.add(timesheet);
 
         menu.addSeparator();
 
-        JMenuItem genChart = new JMenuItem("Jeszcze nie wiem (3)");
-        genChart.addActionListener(e -> action3());
-        menu.add(genChart);
+        JMenuItem filterTimesheet = new JMenuItem("Filter timesheets data");
+        filterTimesheet.addActionListener(e -> filterTimesheet());
+        menu.add(filterTimesheet);
 
         menu.addSeparator();
 
         JMenuItem exit = new JMenuItem("Exit (X)");
         exit.addActionListener(e -> System.exit(0));
         menu.add(exit);
+
+        return menu;
+    }
+
+    private JMenu initProjectMenu() {
+        JMenu menu = new JMenu("Projects");
+
+        JMenuItem project = new JMenuItem("Show projects");
+        project.addActionListener(e -> projectList());
+        menu.add(project);
+
+        JMenuItem projectRoles = new JMenuItem("Show role assignments");
+        projectRoles.addActionListener(e -> projectRoles());
+        menu.add(projectRoles);
+
+        return menu;
+
+    }
+
+    private JMenu initTaskMenu() {
+        JMenu menu = new JMenu("Tasks");
+
+        JMenuItem tasksList = new JMenuItem("Show tasks list");
+        tasksList.addActionListener(e -> filterTasks());
+        menu.add(tasksList);
 
         return menu;
     }
@@ -90,9 +119,6 @@ public class AppFrame extends JFrame {
                 int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_X -> System.exit(0);
-                    case KeyEvent.VK_1 -> employeesList();
-                    case KeyEvent.VK_2 -> timesheetList();
-                    case KeyEvent.VK_3 -> action3();
                     case KeyEvent.VK_I -> DialogHandler.showConfirmDialog(frame, "SQL project" + '\n' +
                             "Version 1.0 " + '\n' + "\u00a9 2020", "About");
                 }
@@ -107,34 +133,50 @@ public class AppFrame extends JFrame {
 
     private void login() {
         this.credentials = DialogHandler.showSignInDialog(this);
+        String[] params = new String[]{this.credentials.getLogin(), this.credentials.getPassword()};
         Results results = Query.runQuery(
                 /* SELECT */ new String[]{"login", "password", "type", "department_id"},
-                /* FROM */ new String("user"),
-                new String("WHERE login is \"" + this.credentials.getLogin()
-                        + "\" and password is \"" + this.credentials.getPassword() + "\""));
-
-        this.credentials.setDepartmentId(results.getTopResult(3));
+                /* FROM */ ("user"),
+                ("WHERE login is ? and password is ?"),
+                null, null, null, params);
 
         if (results.isEmpty()
-                || (!results.getTopResult(2).equals("manager")
-                && !results.getTopResult(2).equals("admin"))) {
+                || (!results.getTopResult(ROLE).equals("manager")
+                && !results.getTopResult(ROLE).equals("admin"))) {
 
             login();
+        } else {
+            this.credentials.setRole(results.getTopResult(ROLE));
+            this.credentials.setDepartmentId(results.getTopResult(DEPARTMENT));
         }
 
     }
 
     private void employeesList() {
-        DialogHandler.showEmployeesDialog(this, this.credentials.getDepartment_id());
+        if (this.credentials.getRole().equals("manager")) {
+            DialogHandler.showEmployeesDialog(this, this.credentials.getDepartment_id());
+        } else {
+            DialogHandler.showEmployeesDialogAdmin(this);
+        }
     }
 
     private void timesheetList() {
         DialogHandler.showTimesheetDialog(this);
     }
 
-    private void action3() {
-        DialogHandler.showConfirmDialog(this, "Action will be implemented in the future",
-                "Placeholder 3");
+    private void filterTimesheet() {
+        DialogHandler.showFilteredTimesheetDialog(this);
     }
 
+    private void projectList() {
+        DialogHandler.showProjects(this);
+    }
+
+    private void projectRoles() {
+        DialogHandler.showProjectAssignments(this);
+    }
+
+    private void filterTasks() {
+        DialogHandler.showTasks(this);
+    }
 }
