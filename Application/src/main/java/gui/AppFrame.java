@@ -1,10 +1,10 @@
 package gui;
 
 import core.Connect;
+import core.Results;
 import utils.DialogHandler;
 import utils.ImageLoader;
 import utils.User;
-import core.Results;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -164,7 +164,7 @@ public class AppFrame extends JFrame {
     }
 
     private void addProject() {
-        if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
+        if (user.getRole().equals("admin") || user.getRole().equals("manager")) {
             DialogHandler.showAddProjectDialog(this);
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
@@ -173,7 +173,7 @@ public class AppFrame extends JFrame {
     }
 
     private void editProject() {
-        if(user.getRole().equals("admin") || user.getRole().equals("manager")) {
+        if (user.getRole().equals("admin") || user.getRole().equals("manager")) {
             DialogHandler.showEditProjectDialog(this);
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
@@ -182,7 +182,7 @@ public class AppFrame extends JFrame {
     }
 
     private void addUser() {
-        if(user.getRole().equals("admin")) {
+        if (user.getRole().equals("admin")) {
             DialogHandler.showNewEmployeeDialog();
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
@@ -191,7 +191,7 @@ public class AppFrame extends JFrame {
     }
 
     private void removeUser() {
-        if(user.getRole().equals("admin")) {
+        if (user.getRole().equals("admin")) {
             DialogHandler.showDeleteEmpDialog(this);
         } else {
             DialogHandler.showConfirmDialog(this, "You are not allowed to use this function!",
