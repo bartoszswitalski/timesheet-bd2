@@ -1,20 +1,20 @@
 package utils;
 
+import core.Connect;
+import core.Results;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Properties;
-
-import core.Connect;
-import core.Results;
-import org.jdatepicker.impl.*;
 
 public class DialogHandler {
 
@@ -106,10 +106,10 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] new_contact = showContactDialog("");
-                if(new_contact != null) {
+                if (new_contact != null) {
                     Connect.runInsert("contact_info",
-                            new String[]{ "info", "user_id", "type" },
-                            new String[]{ "?", "?", "?"},
+                            new String[]{"info", "user_id", "type"},
+                            new String[]{"?", "?", "?"},
                             new String[]{new_contact[1], user.getID(), new_contact[0]});
                     model.addRow(new_contact);
                 }
@@ -120,12 +120,12 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = contacts.getSelectedRow();
-                if(row >= 0){
+                if (row >= 0) {
                     String editVal = contacts.getModel().getValueAt(row, 1).toString();
                     String[] new_contact = showContactDialog(editVal);
                     Connect.runUpdate("contact_info",
-                            new String[]{ "info", "type" },
-                            new String[]{ "?", "?"},
+                            new String[]{"info", "type"},
+                            new String[]{"?", "?"},
                             " WHERE info = ?",
                             new String[]{new_contact[1], new_contact[0], editVal});
                     contacts.setValueAt(new_contact[0], row, 0);
@@ -141,15 +141,15 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = contacts.getSelectedRow();
-                if(row >= 0){
+                if (row >= 0) {
                     int check = JOptionPane.showConfirmDialog(null,
                             "Are you sure?", "Delete", JOptionPane.OK_CANCEL_OPTION);
 
-                    if(check == JOptionPane.OK_OPTION) {
+                    if (check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("contact_info",
                                 " WHERE info = ?",
                                 new String[]{contacts.getModel().getValueAt(row, 1).toString()});
-                        ((DefaultTableModel)contacts.getModel()).removeRow(row);
+                        ((DefaultTableModel) contacts.getModel()).removeRow(row);
                     }
                 } else {
                     DialogHandler.showConfirmDialog(frame,
@@ -198,11 +198,11 @@ public class DialogHandler {
         Results contact_types = Connect.runQuery(
                 new String[]{"type"},
                 "contact_info_type", "", parameters);
-        DefaultComboBoxModel list = new DefaultComboBoxModel();
-        for(int i = 0; i < contact_types.getRowData().length; i++) {
+        DefaultComboBoxModel<String> list = new DefaultComboBoxModel<>();
+        for (int i = 0; i < contact_types.getRowData().length; i++) {
             list.addElement(contact_types.getRowData()[i][0]);
         }
-        JComboBox types = new JComboBox(list);
+        JComboBox<String> types = new JComboBox<>(list);
         controls.add(types);
 
         JTextField value = new JTextField(5);
@@ -213,7 +213,7 @@ public class DialogHandler {
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Add contact", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            return new String[]{ Objects.requireNonNull(types.getSelectedItem()).toString(), value.getText() };
+            return new String[]{Objects.requireNonNull(types.getSelectedItem()).toString(), value.getText()};
         }
         return null;
     }
@@ -271,11 +271,11 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
+                if (row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")) {
                     String[] results = showEditSelectedProjDialog(null,
-                                            projects.getModel().getValueAt(row, 0).toString(),
-                                            projects.getModel().getValueAt(row, 1).toString());
-                    if(results != null) {
+                            projects.getModel().getValueAt(row, 0).toString(),
+                            projects.getModel().getValueAt(row, 1).toString());
+                    if (results != null) {
                         projects.getModel().setValueAt(results[0], row, 1);
                         projects.getModel().setValueAt(results[1], row, 3);
                         showConfirmDialog(null, "Successfully edited project!", "Success");
@@ -292,7 +292,7 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
+                if (row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")) {
                     showNewProjEmpDialog(projects.getModel().getValueAt(row, 0).toString());
                 } else {
                     DialogHandler.showConfirmDialog(frame,
@@ -306,8 +306,8 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
-
+                if (row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")) {
+                    showNewProjTaskDialog(projects.getModel().getValueAt(row, 0).toString());
                 } else {
                     DialogHandler.showConfirmDialog(frame,
                             "You did not select any project or selected a finished one!", "Message");
@@ -320,17 +320,17 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = projects.getSelectedRow();
-                if(row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")){
+                if (row >= 0 && !projects.getModel().getValueAt(row, 5).toString().equals("finished")) {
                     int check = JOptionPane.showConfirmDialog(null,
                             "Are you sure?", "Finished", JOptionPane.OK_CANCEL_OPTION);
 
-                    if(check == JOptionPane.OK_OPTION) {
+                    if (check == JOptionPane.OK_OPTION) {
                         LocalDateTime now = LocalDateTime.now();
                         String[] cols = {"due_date", "end_date", "selector"};
                         String[] vals = {"?", "?", "?"};
                         String[] params = {null, dtf.format(now), "finished"};
                         Connect.runUpdate("project", cols, vals,
-                                " WHERE id = "+"\""+projects.getModel().getValueAt(row, 0)+"\"",
+                                " WHERE id = " + "\"" + projects.getModel().getValueAt(row, 0) + "\"",
                                 params);
                         projects.getModel().setValueAt(null, row, 3);
                         projects.getModel().setValueAt(dtf.format(now), row, 4);
@@ -396,7 +396,7 @@ public class DialogHandler {
             String[] cols = {"name", "due_date"};
             String[] vals = {"?", "?"};
             String[] params = {name.getText(), endPicker.getModel().getValue().toString()};
-            Connect.runUpdate("project", cols, vals, " WHERE id = "+id+" ", params);
+            Connect.runUpdate("project", cols, vals, " WHERE id = " + id + " ", params);
 
             return new String[]{name.getText(), endPicker.getModel().getValue().toString()};
         }
@@ -415,21 +415,21 @@ public class DialogHandler {
         Results employees = Connect.runQuery(
                 new String[]{"id", "first_name", "last_name"},
                 "user", "", parameters);
-        DefaultComboBoxModel listEmployees = new DefaultComboBoxModel();
-        for(int i = 0; i < employees.getRowData().length; i++) {
+        DefaultComboBoxModel<String> listEmployees = new DefaultComboBoxModel<>();
+        for (int i = 0; i < employees.getRowData().length; i++) {
             listEmployees.addElement(employees.getRowData()[i][1] + " " + employees.getRowData()[i][2]);
         }
-        JComboBox employeeBox = new JComboBox(listEmployees);
+        JComboBox<String> employeeBox = new JComboBox<>(listEmployees);
         boxes.add(employeeBox);
 
         Results roles = Connect.runQuery(
                 new String[]{"type"},
                 "role_type", "", parameters);
-        DefaultComboBoxModel listRoles = new DefaultComboBoxModel();
-        for(int i = 0; i < roles.getRowData().length; i++) {
+        DefaultComboBoxModel<String> listRoles = new DefaultComboBoxModel<>();
+        for (int i = 0; i < roles.getRowData().length; i++) {
             listRoles.addElement(roles.getRowData()[i][0]);
         }
-        JComboBox rolesBox = new JComboBox(listRoles);
+        JComboBox<String> rolesBox = new JComboBox<>(listRoles);
         boxes.add(rolesBox);
         panel.add(boxes, BorderLayout.CENTER);
 
@@ -438,9 +438,77 @@ public class DialogHandler {
         if (result == JOptionPane.OK_OPTION) {
             String[] cols = {"user_id", "project_id", "role_type"};
             String[] vals = {"?", "?", "?"};
-            String[] params = { String.valueOf(employeeBox.getSelectedIndex() + 1), id,
-                    rolesBox.getSelectedItem().toString() };
+            String[] params = {String.valueOf(employeeBox.getSelectedIndex() + 1), id,
+                    rolesBox.getSelectedItem().toString()};
             Connect.runInsert("role_assignment", cols, vals, params);
+        }
+    }
+
+    public static void showNewProjTaskDialog(String id) {
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Name", SwingConstants.RIGHT));
+        label.add(new JLabel("Description", SwingConstants.RIGHT));
+        label.add(new JLabel("Type", SwingConstants.RIGHT));
+        label.add(new JLabel("Employee", SwingConstants.RIGHT));
+        label.add(new JLabel("Priority", SwingConstants.RIGHT));
+        label.add(new JLabel("Status", SwingConstants.RIGHT));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel boxes = new JPanel(new GridLayout(0, 1, 2, 2));
+
+        JTextField name = new JTextField(5);
+        boxes.add(name);
+
+        JTextField description = new JTextField(5);
+        boxes.add(description);
+
+        String[] parameters = new String[]{};
+
+        Results types = Connect.runQuery(
+                new String[]{"type"},
+                "task_type", "", parameters);
+        DefaultComboBoxModel<String> listTypes = new DefaultComboBoxModel<>();
+        for (int i = 0; i < types.getRowData().length; i++) {
+            listTypes.addElement(types.getRowData()[i][0]);
+        }
+        JComboBox<String> typesBox = new JComboBox<>(listTypes);
+        boxes.add(typesBox);
+        panel.add(boxes, BorderLayout.CENTER);
+
+        Results employees = Connect.runQuery(
+                new String[]{"id", "first_name", "last_name"},
+                "user", "", parameters);
+        DefaultComboBoxModel<String> listEmployees = new DefaultComboBoxModel<>();
+        for (int i = 0; i < employees.getRowData().length; i++) {
+            listEmployees.addElement(employees.getRowData()[i][1] + " " + employees.getRowData()[i][2]);
+        }
+        JComboBox<String> employeeBox = new JComboBox<>(listEmployees);
+        boxes.add(employeeBox);
+
+        DefaultComboBoxModel<String> listPriorities = new DefaultComboBoxModel<>();
+        for (int i = 1; i <= 10; i++) {
+            listPriorities.addElement(String.valueOf(i));
+        }
+        JComboBox<String> priorityBox = new JComboBox<>(listPriorities);
+        boxes.add(priorityBox);
+
+        DefaultComboBoxModel<String> listStatuses = new DefaultComboBoxModel<>();
+        listStatuses.addElement("active");
+        listStatuses.addElement("finished");
+        JComboBox<String> statusBox = new JComboBox<>(listStatuses);
+        boxes.add(statusBox);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Add new employee", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String[] cols = {"user_id", "project_id", "type", "priority", "description", "name", "status"};
+            String[] vals = {"?", "?", "?", "?", "?", "?", "?"};
+            String[] params = {String.valueOf(employeeBox.getSelectedIndex() + 1), id,
+                    Objects.requireNonNull(typesBox.getSelectedItem()).toString(),
+                    Objects.requireNonNull(typesBox.getSelectedItem()).toString(), description.getText(),
+                    name.getText(), Objects.requireNonNull(statusBox.getSelectedItem()).toString()};
+            Connect.runInsert("task", cols, vals, params);
         }
     }
 
@@ -461,11 +529,11 @@ public class DialogHandler {
         Results departs = Connect.runQuery(
                 new String[]{"id"},
                 "department", "", parameters);
-        DefaultComboBoxModel listDeparts = new DefaultComboBoxModel();
-        for(int i = 0; i < departs.getRowData().length; i++) {
+        DefaultComboBoxModel<String> listDeparts = new DefaultComboBoxModel<>();
+        for (int i = 0; i < departs.getRowData().length; i++) {
             listDeparts.addElement(departs.getRowData()[i][0]);
         }
-        JComboBox valueDepart = new JComboBox(listDeparts);
+        JComboBox<String> valueDepart = new JComboBox<>(listDeparts);
         rightControls.add(valueDepart);
 
         leftControls.add(new JLabel("Last name:", SwingConstants.LEFT));
@@ -478,11 +546,11 @@ public class DialogHandler {
         Results roleTypes = Connect.runQuery(
                 new String[]{"type"},
                 "user_type", "", parameters);
-        DefaultComboBoxModel listRoles = new DefaultComboBoxModel();
-        for(int i = 0; i < roleTypes.getRowData().length; i++) {
+        DefaultComboBoxModel<String> listRoles = new DefaultComboBoxModel<>();
+        for (int i = 0; i < roleTypes.getRowData().length; i++) {
             listRoles.addElement(roleTypes.getRowData()[i][0]);
         }
-        JComboBox types = new JComboBox(listRoles);
+        JComboBox<String> types = new JComboBox<>(listRoles);
         leftControls.add(types);
 
         panel.add(rightControls, BorderLayout.WEST);
@@ -491,7 +559,7 @@ public class DialogHandler {
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Add employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            if(valueName.getText().equals("") || valueSurname.getText().equals("")
+            if (valueName.getText().equals("") || valueSurname.getText().equals("")
                     || valueLogin.getText().equals("") || valuePass.getText().equals("")) {
                 showConfirmDialog(null, "Not all fields have been filled up!", "Error");
             } else {
@@ -519,15 +587,15 @@ public class DialogHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = accounts.getSelectedRow();
-                if(row >= 0){
+                if (row >= 0) {
                     int check = JOptionPane.showConfirmDialog(null,
                             "Are you sure?", "Delete", JOptionPane.OK_CANCEL_OPTION);
 
-                    if(check == JOptionPane.OK_OPTION) {
+                    if (check == JOptionPane.OK_OPTION) {
                         Connect.runDelete("user",
                                 " WHERE id = ?",
-                                        new String[]{accounts.getModel().getValueAt(row, 0).toString()});
-                        ((DefaultTableModel)accounts.getModel()).removeRow(row);
+                                new String[]{accounts.getModel().getValueAt(row, 0).toString()});
+                        ((DefaultTableModel) accounts.getModel()).removeRow(row);
                     }
                 } else {
                     DialogHandler.showConfirmDialog(frame,
